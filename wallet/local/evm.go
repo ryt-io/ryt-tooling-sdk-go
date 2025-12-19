@@ -22,6 +22,7 @@ import (
 
 // SetChain sets the current EVM chain by RPC URL
 // Special case: "c", "cchain", "c-chain" (case-insensitive) uses default network's C-Chain
+// Configuration for client operations: 30s timeout, 3 retry attempts, 1s between retries
 func (w *LocalWallet) SetChain(rpcURL string) error {
 	// Close existing client if any
 	if w.evmClient != nil {

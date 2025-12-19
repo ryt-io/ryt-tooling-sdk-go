@@ -24,6 +24,12 @@ import (
 
 // CreateSubnetSeparateSteps demonstrates creating a subnet using separate BuildTx, SignTx, and SendTx calls
 // This example shows the individual steps that SubmitTx performs internally.
+//
+// Prerequisites:
+//   - Your account must have AVAX on FUJI P-Chain to pay for tx fees
+//   - Get free testnet tokens from the Avalanche Faucet: https://faucet.avax.network/
+//   - A cross-chain transfer may be needed to move funds from C-Chain to P-Chain
+//
 // Required environment variables:
 //   - PRIVATE_KEY: Hex-encoded private key (e.g., "56289e99c94b6912bfc12adc093c9b51124f0dc54ac7a766b2bc5ccf558d8027")
 //   - CONTROL_KEY_ADDRESS: P-Chain bech32 address for subnet control (e.g., "P-fuji1zwch24mn3sjkahds98fjd0asudjk2e4ajduu")
@@ -48,7 +54,11 @@ func CreateSubnetSeparateSteps() error {
 
 	// Create a local wallet with Fuji network
 	net := network.FujiNetwork()
-	localWallet, err := local.NewLocalWallet(logging.NoLog{}, net)
+	var logger logging.Logger = logging.NoLog{}
+	if os.Getenv("LOG_ENABLED") != "" {
+		logger = logging.NewLogger("create-subnet-separate-steps", logging.NewWrappedCore(logging.Info, os.Stdout, logging.JSON.ConsoleEncoder()))
+	}
+	localWallet, err := local.NewLocalWallet(logger, net)
 	if err != nil {
 		return fmt.Errorf("failed to create wallet: %w", err)
 	}

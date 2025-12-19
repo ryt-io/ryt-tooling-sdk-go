@@ -27,9 +27,14 @@ var erc20Bin string
 
 // This example demonstrates how to deploy an ERC20 token contract and interact with it
 //
+// Prerequisites:
+//   - Your account must have FUJI tokens to pay for gas fees
+//   - Get free testnet tokens from the Avalanche Faucet: https://faucet.avax.network/
+//
 // Environment variables:
 //   - PRIVATE_KEY: Private key for deploying and interacting with the contract (required)
 //   - RPC_URL: The RPC URL to connect to (defaults to Fuji C-Chain if not set)
+//   - LOG_ENABLED: Set to any value to enable debug logging (optional)
 
 // Helper function to read and parse ERC20 balance
 func getBalance(w wallet.Wallet, tokenAddr common.Address, address string) (*big.Int, error) {
@@ -57,7 +62,11 @@ func main() {
 
 	// Create wallet with Fuji network
 	net := network.FujiNetwork()
-	w, err := local.NewLocalWallet(logging.NoLog{}, net)
+	var logger logging.Logger = logging.NoLog{}
+	if os.Getenv("LOG_ENABLED") != "" {
+		logger = logging.NewLogger("erc20-example", logging.NewWrappedCore(logging.Info, os.Stdout, logging.JSON.ConsoleEncoder()))
+	}
+	w, err := local.NewLocalWallet(logger, net)
 	if err != nil {
 		fmt.Printf("Failed to create wallet: %s\n", err)
 		os.Exit(1)

@@ -25,6 +25,7 @@ const warpPrecompileAddress = "0x0200000000000000000000000000000000000005"
 //
 // Environment variables:
 //   - RPC_URL: The RPC URL to connect to (defaults to Fuji C-Chain if not set)
+//   - LOG_ENABLED: Set to any value to enable debug logging (optional)
 func main() {
 	// Get RPC URL from environment variable, default to "C" for Fuji C-Chain
 	rpcURL := os.Getenv("RPC_URL")
@@ -33,7 +34,11 @@ func main() {
 	}
 
 	// Create a local wallet with Fuji network
-	w, err := local.NewLocalWallet(logging.NoLog{}, network.FujiNetwork())
+	var logger logging.Logger = logging.NoLog{}
+	if os.Getenv("LOG_ENABLED") != "" {
+		logger = logging.NewLogger("get-blockchain-id", logging.NewWrappedCore(logging.Info, os.Stdout, logging.JSON.ConsoleEncoder()))
+	}
+	w, err := local.NewLocalWallet(logger, network.FujiNetwork())
 	if err != nil {
 		fmt.Printf("Failed to create wallet: %s\n", err)
 		os.Exit(1)

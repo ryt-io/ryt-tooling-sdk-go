@@ -26,6 +26,7 @@ const dexalotTestnetRPC = "https://subnets.avax.network/dexalot/testnet/rpc"
 //
 // Environment variables:
 //   - RPC_URL: The blockchain RPC URL (defaults to Dexalot testnet if not set)
+//   - LOG_ENABLED: Set to any value to enable debug logging (optional)
 func main() {
 	// Get RPC URL from environment variable
 	rpcURL := os.Getenv("RPC_URL")
@@ -47,7 +48,11 @@ func main() {
 	fmt.Printf("Validator Manager Address: %s\n\n", vmInfo.ManagerAddress)
 
 	// Create wallet and set chain
-	w, err := local.NewLocalWallet(logging.NoLog{}, net)
+	var logger logging.Logger = logging.NoLog{}
+	if os.Getenv("LOG_ENABLED") != "" {
+		logger = logging.NewLogger("query-validator-manager", logging.NewWrappedCore(logging.Info, os.Stdout, logging.JSON.ConsoleEncoder()))
+	}
+	w, err := local.NewLocalWallet(logger, net)
 	if err != nil {
 		fmt.Printf("Failed to create wallet: %s\n", err)
 		os.Exit(1)

@@ -27,6 +27,7 @@ const icmMessengerAddr = "0x253b2784c75e510dD0fF1da844684a1aC0aa5fcf"
 //   - PRIVATE_KEY: Private key for the account (optional, only needed for account-specific queries)
 //   - EVM_ADDRESS: Address to query balance and nonce (required)
 //   - RPC_URL: The RPC URL to connect to (defaults to Fuji C-Chain if not set)
+//   - LOG_ENABLED: Set to any value to enable debug logging (optional)
 func main() {
 	// Get address from environment variable
 	evmAddress := os.Getenv("EVM_ADDRESS")
@@ -43,7 +44,11 @@ func main() {
 
 	// Create a local wallet with Fuji network
 	net := network.FujiNetwork()
-	w, err := local.NewLocalWallet(logging.NoLog{}, net)
+	var logger logging.Logger = logging.NoLog{}
+	if os.Getenv("LOG_ENABLED") != "" {
+		logger = logging.NewLogger("query-chain-info", logging.NewWrappedCore(logging.Info, os.Stdout, logging.JSON.ConsoleEncoder()))
+	}
+	w, err := local.NewLocalWallet(logger, net)
 	if err != nil {
 		fmt.Printf("Failed to create wallet: %s\n", err)
 		os.Exit(1)
