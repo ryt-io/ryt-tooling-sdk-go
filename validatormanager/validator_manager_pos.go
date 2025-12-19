@@ -208,6 +208,7 @@ func GetERC20StakingTokenAddress(
 ) (common.Address, error) {
 	out, err := contract.CallToMethod(
 		rpcURL,
+		common.Address{},
 		managerAddress,
 		"erc20()->(address)",
 		nil,
