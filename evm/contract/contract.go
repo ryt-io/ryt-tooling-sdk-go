@@ -473,6 +473,7 @@ func handleFailedReceiptStatus(
 
 func CallToMethod(
 	rpcURL string,
+	from common.Address,
 	contractAddress common.Address,
 	methodSpec string,
 	outputParams interface{},
@@ -496,7 +497,7 @@ func CallToMethod(
 	defer client.Close()
 	contract := bind.NewBoundContract(contractAddress, *abi, client.EthClient, client.EthClient, client.EthClient)
 	var out []interface{}
-	err = contract.Call(&bind.CallOpts{}, &out, methodName, params...)
+	err = contract.Call(&bind.CallOpts{From: from}, &out, methodName, params...)
 	if err != nil {
 		return nil, err
 	}
