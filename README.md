@@ -22,7 +22,7 @@ To update the SDK use `go get -u` to retrieve the latest version of the SDK.
 
 ## Wallet Interface
 
-The SDK provides a `Wallet` interface for interacting with Avalanche networks. The `local.LocalWallet` is its main implementation.
+The SDK provides a `Wallet` interface for interacting with Avalanche networks. `local.LocalWallet` is its main implementation.
 
 ```go
 // Create a wallet for Fuji testnet
@@ -34,13 +34,17 @@ w.ImportAccount(acc)
 
 // P-Chain operations (create subnet, add validators, etc.)
 result, err := w.Primary().SubmitTx(ctx, types.SubmitTxParams{
-    OperationType: types.CreateSubnet,
+    BuildTxInput: &pchainTxs.CreateSubnetTxParams{
+        ControlKeys: []string{controlKeyAddress},
+        Threshold:   1,
+    },
 })
 
 // EVM operations on any chain
-w.SetChain("https://my-l1.example.com/rpc")  // or "C" for C-Chain
+w.SetChain("https://my-l1.example.com/rpc")  // use "C" for C-Chain
 balance, err := w.Balance()
-tx, receipt, err := w.WriteContract(contractAddr, nil, wallet.Method("transfer(address,uint256)", to, amount))
+method := wallet.Method("transfer(address,uint256)->(bool)", common.HexToAddress(to), amount)
+tx, receipt, err := w.WriteContract(contractAddr, nil, method)
 ```
 
 See [wallet/wallet.go](wallet/wallet.go) for the full interface definition.
