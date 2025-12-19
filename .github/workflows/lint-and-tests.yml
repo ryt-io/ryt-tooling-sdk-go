@@ -1,4 +1,4 @@
-name: Lint
+name: Lint and Tests
 
 on:
   push:
@@ -11,18 +11,39 @@ jobs:
     name: Lint
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v5
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
         with:
           go-version-file: 'go.mod'
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@v3
+
+      - name: Lint Golang
+        run: ./scripts/lint.sh
+
+      - name: Check License
+        run: |
+          go install github.com/google/addlicense@v1.0.0
+          addlicense -f ./LICENSE.header -check -v ./**/*.go ./**/**/*.go
+
+  unit_test:
+    name: Unit Tests (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-24.04, macos-14]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
         with:
-          version: v1.64.5
-          working-directory: .
-          args: --timeout 5m
-      - name: Install license check
-        run: go install github.com/google/addlicense@v1.0.0
-      - name: Check license
-        run: addlicense -f ./LICENSE.header -check -v ./**/*.go ./**/**/*.go
-  
+          go-version-file: 'go.mod'
+
+      - name: Install Go dependencies
+        run: go mod download
+
+      - name: Run Unit Tests
+        run: ./scripts/unit.sh
