@@ -27,35 +27,35 @@ import (
 
 // LocalWallet represents a local wallet implementation
 type LocalWallet struct {
-	wallet         *primary.Wallet            // Primary wallet for P/X/C operations
-	accounts       map[string]account.Account // Named accounts map
-	activeAccount  string                     // Currently active account name
-	defaultNetwork network.Network            // Default network for operations
-	seenSubnetIDs  []ids.ID                   // Subnet IDs seen for active account
+	primaryWallet     *primary.Wallet            // Avalanchego primary wallet for P/X/C operations
+	accounts          map[string]account.Account // Named accounts map
+	activeAccountName string                     // Currently active account name
+	activeNetwork     network.Network            // Active network for operations
+	seenSubnetIDs     []ids.ID                   // Subnet IDs seen for active account
 }
 
 // Ensure LocalWallet implements Wallet interface
 var _ wallet.Wallet = (*LocalWallet)(nil)
 
 // NewLocalWallet creates a new local wallet with the specified network
-func NewLocalWallet(net network.Network) (*LocalWallet, error) {
+func NewLocalWallet(network network.Network) (*LocalWallet, error) {
 	return &LocalWallet{
-		wallet:         nil,
-		accounts:       make(map[string]account.Account),
-		activeAccount:  "",
-		defaultNetwork: net,
-		seenSubnetIDs:  []ids.ID{},
+		primaryWallet:     nil,
+		accounts:          make(map[string]account.Account),
+		activeAccountName: "",
+		activeNetwork:     network,
+		seenSubnetIDs:     []ids.ID{},
 	}, nil
 }
 
-// SetNetwork sets the default network for wallet operations
-func (w *LocalWallet) SetNetwork(net network.Network) {
-	w.defaultNetwork = net
+// SetNetwork sets the active network for wallet operations
+func (w *LocalWallet) SetNetwork(network network.Network) {
+	w.activeNetwork = network
 }
 
-// Network returns the default network for wallet operations
+// Network returns the active network for wallet operations
 func (w *LocalWallet) Network() network.Network {
-	return w.defaultNetwork
+	return w.activeNetwork
 }
 
 // buildWalletConfig creates a WalletConfig with appropriate SubnetIDs based on transaction type
@@ -154,20 +154,21 @@ func extractSubnetIDFromTx(tx interface{}) (ids.ID, error) {
 func (w *LocalWallet) getWalletToUse(ctx context.Context, accountNames []string, params interface{}) (*primary.Wallet, error) {
 	if len(accountNames) > 0 {
 		// Create temporary wallet for the specified account
+		// TODO: Support multiple accounts for multisig transactions
 		accountName := accountNames[0]
 		acc, exists := w.accounts[accountName]
 		if !exists {
 			return nil, fmt.Errorf("account %q not found", accountName)
 		}
 		config := buildWalletConfig(params)
-		tempWallet, err := getWalletFromAccount(ctx, acc, w.defaultNetwork, &config)
+		tempWallet, err := createPrimaryWallet(ctx, acc, w.activeNetwork, &config)
 		if err != nil {
 			return nil, fmt.Errorf("error creating wallet for account: %w", err)
 		}
 		return tempWallet, nil
 	}
 	// Use the existing wallet (with active account)
-	if w.activeAccount == "" {
+	if w.activeAccountName == "" {
 		return nil, fmt.Errorf("no account specified and no active account set")
 	}
 
@@ -178,17 +179,17 @@ func (w *LocalWallet) getWalletToUse(ctx context.Context, accountNames []string,
 		if subnetID != ids.Empty && !w.hasSeenSubnetID(subnetID) {
 			// New subnet ID detected, rebuild wallet with all seen subnet IDs
 			w.seenSubnetIDs = append(w.seenSubnetIDs, subnetID)
-			acc := w.accounts[w.activeAccount]
+			acc := w.accounts[w.activeAccountName]
 			newConfig := primary.WalletConfig{SubnetIDs: w.seenSubnetIDs}
-			newWallet, err := getWalletFromAccount(ctx, acc, w.defaultNetwork, &newConfig)
+			newWallet, err := createPrimaryWallet(ctx, acc, w.activeNetwork, &newConfig)
 			if err != nil {
 				return nil, fmt.Errorf("error refreshing wallet with new subnet ID: %w", err)
 			}
-			w.wallet = newWallet
+			w.primaryWallet = newWallet
 		}
 	}
 
-	return w.wallet, nil
+	return w.primaryWallet, nil
 }
 
 // hasSeenSubnetID checks if a subnet ID has been seen before
@@ -203,7 +204,6 @@ func (w *LocalWallet) hasSeenSubnetID(subnetID ids.ID) bool {
 
 // BuildTx constructs a transaction for the specified operation
 func (w *LocalWallet) BuildTx(ctx context.Context, params types.BuildTxParams) (types.BuildTxResult, error) {
-	// Validate parameters first
 	if err := params.Validate(); err != nil {
 		return types.BuildTxResult{}, fmt.Errorf("invalid parameters: %w", err)
 	}
@@ -215,9 +215,10 @@ func (w *LocalWallet) BuildTx(ctx context.Context, params types.BuildTxParams) (
 
 	var accountToUse account.Account
 	if len(params.AccountNames) > 0 {
+		// TODO: Support multiple accounts for multisig transactions
 		accountToUse = w.accounts[params.AccountNames[0]]
 	} else {
-		accountToUse = w.accounts[w.activeAccount]
+		accountToUse = w.accounts[w.activeAccountName]
 	}
 
 	return wallet.BuildTx(walletToUse, accountToUse, params)
@@ -225,7 +226,6 @@ func (w *LocalWallet) BuildTx(ctx context.Context, params types.BuildTxParams) (
 
 // SignTx signs a transaction
 func (w *LocalWallet) SignTx(ctx context.Context, params types.SignTxParams) (types.SignTxResult, error) {
-	// Validate parameters first
 	if err := params.Validate(); err != nil {
 		return types.SignTxResult{}, fmt.Errorf("invalid parameters: %w", err)
 	}
@@ -240,7 +240,6 @@ func (w *LocalWallet) SignTx(ctx context.Context, params types.SignTxParams) (ty
 
 // SendTx submits a signed transaction to the Network
 func (w *LocalWallet) SendTx(ctx context.Context, params types.SendTxParams) (types.SendTxResult, error) {
-	// Validate parameters first
 	if err := params.Validate(); err != nil {
 		return types.SendTxResult{}, fmt.Errorf("invalid parameters: %w", err)
 	}
@@ -318,7 +317,7 @@ func (w *LocalWallet) Commit(transaction types.SignTxResult) (*avagoTxs.Tx, erro
 		defer cancel()
 		options := []common.Option{common.WithContext(ctx)}
 		// TODO: split error checking and recovery between issuing and waiting for status
-		issueTxErr = w.wallet.P().IssueTx(tx, options...)
+		issueTxErr = w.primaryWallet.P().IssueTx(tx, options...)
 		if issueTxErr == nil {
 			break
 		}
