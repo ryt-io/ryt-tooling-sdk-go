@@ -16,8 +16,8 @@ import (
 // Wallet Operations Interfaces
 // =========================================================================
 
-// PrimaryOperations handles P/X/C chain operations (Avalanche consensus)
-type PrimaryOperations interface {
+// PrimaryNetworkOperations handles P/X/C chain operations (Avalanche consensus)
+type PrimaryNetworkOperations interface {
 	// BuildTx constructs a transaction for the specified operation
 	BuildTx(ctx context.Context, params types.BuildTxParams) (types.BuildTxResult, error)
 
@@ -72,5 +72,5 @@ type Wallet interface {
 
 	// Primary returns the interface for P/X/C chain operations
 	// Example: w.Primary().BuildTx(...)
-	Primary() PrimaryOperations
+	Primary() PrimaryNetworkOperations
 }

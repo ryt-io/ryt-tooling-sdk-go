@@ -45,7 +45,7 @@ func sendWithRetry(wallet *primary.Wallet, tx *txs.Tx) error {
 	return nil
 }
 
-// SendTx sends P-Chain transactions
+// SendTx sends P-Chain transactions with retry logic (3 attempts, 2s between retries)
 func SendTx(wallet *primary.Wallet, params types.SendTxParams) (types.SendTxResult, error) {
 	// Validate transaction is defined
 	if params.SignTxResult.Undefined() {

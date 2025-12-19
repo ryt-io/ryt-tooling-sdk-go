@@ -47,6 +47,6 @@ func (w *LocalWallet) Network() network.Network {
 }
 
 // Primary returns the interface for P/X/C chain operations
-func (w *LocalWallet) Primary() wallet.PrimaryOperations {
-	return &primaryOperations{localWallet: w}
+func (w *LocalWallet) Primary() wallet.PrimaryNetworkOperations {
+	return &primaryNetworkOperations{localWallet: w}
 }
