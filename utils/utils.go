@@ -51,9 +51,12 @@ func GetAPILargeContext() (context.Context, context.CancelFunc) {
 	return GetTimedContext(constants.APIRequestLargeTimeout)
 }
 
-// Context for wallet refresh operations
-func GetWalletRefreshContext() (context.Context, context.CancelFunc) {
-	return GetTimedContext(constants.WalletRefreshTimeout)
+// GetPrimaryWalletCreationContext returns a context for primary wallet creation operations.
+// A call to avalanchego's primary.MakeWallet, retrieves UTXOs for the wallet accounts
+// on P/X/C chains. Each UTXO retrieval can be paginated, causing
+// multiple API calls. This timeout covers multiple paginated calls conservatively.
+func GetPrimaryWalletCreationContext() (context.Context, context.CancelFunc) {
+	return GetTimedContext(constants.PrimaryWalletCreationTimeout)
 }
 
 // Timed Context

@@ -39,7 +39,7 @@ func (w *LocalWallet) SetChain(rpcURL string) error {
 	// Handle C-Chain shortcuts (case-insensitive)
 	lowerRPC := strings.ToLower(rpcURL)
 	if lowerRPC == "c" || lowerRPC == "cchain" || lowerRPC == "c-chain" {
-		rpcURL = w.defaultNetwork.Endpoint + "/ext/bc/C/rpc"
+		rpcURL = w.activeNetwork.Endpoint + "/ext/bc/C/rpc"
 	} else {
 		// Validate URL format for non-C-Chain cases
 		parsedURL, err := url.Parse(rpcURL)
@@ -87,10 +87,10 @@ func (w *LocalWallet) getAccount(opts ...wallet.Option) (account.Account, error)
 	if options.AccountName != "" {
 		accountName = options.AccountName
 	} else {
-		if w.activeAccount == "" {
+		if w.activeAccountName == "" {
 			return nil, fmt.Errorf("no active account set")
 		}
-		accountName = w.activeAccount
+		accountName = w.activeAccountName
 	}
 
 	acc, exists := w.accounts[accountName]

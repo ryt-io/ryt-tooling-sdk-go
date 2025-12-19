@@ -52,7 +52,12 @@ func main() {
 	// Import account from private key if provided
 	privateKey := os.Getenv("PRIVATE_KEY")
 	if privateKey != "" {
-		_, err = w.ImportAccount("user", account.AccountSpec{PrivateKey: privateKey})
+		localAccount, err := account.ImportFromPrivateKey("user", privateKey)
+		if err != nil {
+			fmt.Printf("Failed to create account from private key: %s\n", err)
+			os.Exit(1)
+		}
+		err = w.ImportAccount(localAccount)
 		if err != nil {
 			fmt.Printf("Failed to import account: %s\n", err)
 			os.Exit(1)
@@ -124,7 +129,12 @@ func main() {
 			fmt.Printf("Failed to get account info: %s\n", err)
 			os.Exit(1)
 		}
-		fmt.Printf("Account Address: %s\n", accountInfo.EVMAddress)
+		evmAddr, err := accountInfo.GetEVMAddress()
+		if err != nil {
+			fmt.Printf("Failed to get EVM address: %s\n", err)
+			os.Exit(1)
+		}
+		fmt.Printf("Account Address: %s\n", evmAddr)
 
 		// Get balance
 		balance, err := w.Balance()

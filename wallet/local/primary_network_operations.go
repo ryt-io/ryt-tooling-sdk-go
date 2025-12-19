@@ -17,16 +17,16 @@ import (
 	avagoTxs "github.com/ava-labs/avalanchego/vms/platformvm/txs"
 )
 
-// primaryOperations implements the PrimaryOperations interface for LocalWallet
-type primaryOperations struct {
+// primaryNetworkOperations implements the PrimaryNetworkOperations interface for LocalWallet
+type primaryNetworkOperations struct {
 	localWallet *LocalWallet
 }
 
-// Ensure primaryOperations implements PrimaryOperations interface
-var _ wallet.PrimaryOperations = (*primaryOperations)(nil)
+// Ensure primaryNetworkOperations implements PrimaryNetworkOperations interface
+var _ wallet.PrimaryNetworkOperations = (*primaryNetworkOperations)(nil)
 
 // BuildTx constructs a transaction for the specified operation
-func (p *primaryOperations) BuildTx(ctx context.Context, params types.BuildTxParams) (types.BuildTxResult, error) {
+func (p *primaryNetworkOperations) BuildTx(ctx context.Context, params types.BuildTxParams) (types.BuildTxResult, error) {
 	// Validate parameters first
 	if err := params.Validate(); err != nil {
 		return types.BuildTxResult{}, fmt.Errorf("invalid parameters: %w", err)
@@ -41,14 +41,17 @@ func (p *primaryOperations) BuildTx(ctx context.Context, params types.BuildTxPar
 	if len(params.AccountNames) > 0 {
 		accountToUse = p.localWallet.accounts[params.AccountNames[0]]
 	} else {
-		accountToUse = p.localWallet.accounts[p.localWallet.activeAccount]
+		if p.localWallet.activeAccountName == "" {
+			return types.BuildTxResult{}, fmt.Errorf("no active account set")
+		}
+		accountToUse = p.localWallet.accounts[p.localWallet.activeAccountName]
 	}
 
 	return wallet.BuildTx(walletToUse, accountToUse, params)
 }
 
 // SignTx signs a transaction
-func (p *primaryOperations) SignTx(ctx context.Context, params types.SignTxParams) (types.SignTxResult, error) {
+func (p *primaryNetworkOperations) SignTx(ctx context.Context, params types.SignTxParams) (types.SignTxResult, error) {
 	// Validate parameters first
 	if err := params.Validate(); err != nil {
 		return types.SignTxResult{}, fmt.Errorf("invalid parameters: %w", err)
@@ -63,7 +66,7 @@ func (p *primaryOperations) SignTx(ctx context.Context, params types.SignTxParam
 }
 
 // SendTx submits a signed transaction to the Network
-func (p *primaryOperations) SendTx(ctx context.Context, params types.SendTxParams) (types.SendTxResult, error) {
+func (p *primaryNetworkOperations) SendTx(ctx context.Context, params types.SendTxParams) (types.SendTxResult, error) {
 	// Validate parameters first
 	if err := params.Validate(); err != nil {
 		return types.SendTxResult{}, fmt.Errorf("invalid parameters: %w", err)
@@ -78,7 +81,7 @@ func (p *primaryOperations) SendTx(ctx context.Context, params types.SendTxParam
 }
 
 // SubmitTx is a convenience method that combines BuildTx, SignTx, and SendTx
-func (p *primaryOperations) SubmitTx(ctx context.Context, params types.SubmitTxParams) (types.SubmitTxResult, error) {
+func (p *primaryNetworkOperations) SubmitTx(ctx context.Context, params types.SubmitTxParams) (types.SubmitTxResult, error) {
 	// Validate parameters first
 	if err := params.Validate(); err != nil {
 		return types.SubmitTxResult{}, fmt.Errorf("invalid parameters: %w", err)
@@ -115,7 +118,7 @@ func (p *primaryOperations) SubmitTx(ctx context.Context, params types.SubmitTxP
 }
 
 // hasSeenSubnetID checks if a subnet ID has been seen before
-func (p *primaryOperations) hasSeenSubnetID(subnetID ids.ID) bool {
+func (p *primaryNetworkOperations) hasSeenSubnetID(subnetID ids.ID) bool {
 	for _, id := range p.localWallet.seenSubnetIDs {
 		if id == subnetID {
 			return true
@@ -125,7 +128,7 @@ func (p *primaryOperations) hasSeenSubnetID(subnetID ids.ID) bool {
 }
 
 // getWalletToUse determines which wallet to use based on AccountNames parameter
-func (p *primaryOperations) getWalletToUse(ctx context.Context, accountNames []string, params interface{}) (*primary.Wallet, error) {
+func (p *primaryNetworkOperations) getWalletToUse(ctx context.Context, accountNames []string, params interface{}) (*primary.Wallet, error) {
 	if len(accountNames) > 0 {
 		// Create temporary wallet for the specified account
 		accountName := accountNames[0]
@@ -134,14 +137,14 @@ func (p *primaryOperations) getWalletToUse(ctx context.Context, accountNames []s
 			return nil, fmt.Errorf("account %q not found", accountName)
 		}
 		config := buildWalletConfig(params)
-		tempWallet, err := getWalletFromAccount(ctx, acc, p.localWallet.defaultNetwork, &config)
+		tempWallet, err := createPrimaryWallet(ctx, acc, p.localWallet.activeNetwork, &config)
 		if err != nil {
 			return nil, fmt.Errorf("error creating wallet for account: %w", err)
 		}
 		return tempWallet, nil
 	}
 	// Use the existing wallet (with active account)
-	if p.localWallet.activeAccount == "" {
+	if p.localWallet.activeAccountName == "" {
 		return nil, fmt.Errorf("no account specified and no active account set")
 	}
 
@@ -152,17 +155,17 @@ func (p *primaryOperations) getWalletToUse(ctx context.Context, accountNames []s
 		if subnetID != ids.Empty && !p.hasSeenSubnetID(subnetID) {
 			// New subnet ID detected, rebuild wallet with all seen subnet IDs
 			p.localWallet.seenSubnetIDs = append(p.localWallet.seenSubnetIDs, subnetID)
-			acc := p.localWallet.accounts[p.localWallet.activeAccount]
+			acc := p.localWallet.accounts[p.localWallet.activeAccountName]
 			newConfig := primary.WalletConfig{SubnetIDs: p.localWallet.seenSubnetIDs}
-			newWallet, err := getWalletFromAccount(ctx, acc, p.localWallet.defaultNetwork, &newConfig)
+			newWallet, err := createPrimaryWallet(ctx, acc, p.localWallet.activeNetwork, &newConfig)
 			if err != nil {
 				return nil, fmt.Errorf("error refreshing wallet with new subnet ID: %w", err)
 			}
-			p.localWallet.wallet = newWallet
+			p.localWallet.primaryWallet = newWallet
 		}
 	}
 
-	return p.localWallet.wallet, nil
+	return p.localWallet.primaryWallet, nil
 }
 
 // buildWalletConfig creates a WalletConfig with appropriate SubnetIDs based on transaction type

@@ -64,7 +64,12 @@ func main() {
 	}
 
 	// Import account from private key
-	_, err = w.ImportAccount("deployer", account.AccountSpec{PrivateKey: privateKey})
+	localAccount, err := account.ImportFromPrivateKey("deployer", privateKey)
+	if err != nil {
+		fmt.Printf("Failed to create account from private key: %s\n", err)
+		os.Exit(1)
+	}
+	err = w.ImportAccount(localAccount)
 	if err != nil {
 		fmt.Printf("Failed to import account: %s\n", err)
 		os.Exit(1)
@@ -84,7 +89,11 @@ func main() {
 		fmt.Printf("Failed to get account info: %s\n", err)
 		os.Exit(1)
 	}
-	deployerAddr := accountInfo.EVMAddress
+	deployerAddr, err := accountInfo.GetEVMAddress()
+	if err != nil {
+		fmt.Printf("Failed to get EVM address: %s\n", err)
+		os.Exit(1)
+	}
 	fmt.Printf("Deployer address: %s\n", deployerAddr)
 
 	// Check balance before deployment
