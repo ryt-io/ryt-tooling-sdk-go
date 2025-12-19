@@ -63,20 +63,26 @@ const (
 )
 
 func main() {
+	if err := run(); err != nil {
+		log.Fatal(err)
+	}
+}
+
+func run() error {
 	fmt.Println("Setting up Ledger connection...")
 	fmt.Println("Make sure your Ledger device is connected and the Avalanche app is open.")
 
 	ledgerDevice, err := ledger.New()
 	if err != nil {
-		log.Fatalf("Failed to connect to Ledger device: %v", err)
+		return fmt.Errorf("failed to connect to Ledger device: %w", err)
 	}
-	defer ledgerDevice.Disconnect()
+	defer func() { _ = ledgerDevice.Disconnect() }()
 
 	fmt.Println("Ledger device connected successfully!")
 
 	kc, err := ledger.NewKeychainFromIndices(ledgerDevice, []uint32{0})
 	if err != nil {
-		log.Fatalf("Failed to create ledger keychain: %v", err)
+		return fmt.Errorf("failed to create ledger keychain: %w", err)
 	}
 
 	fmt.Println("\nCreating wallet context...")
@@ -91,7 +97,7 @@ func main() {
 		primary.WalletConfig{},
 	)
 	if err != nil {
-		log.Fatalf("Failed to create wallet: %v", err)
+		return fmt.Errorf("failed to create wallet: %w", err)
 	}
 
 	fmt.Println("Wallet created successfully!")
@@ -108,7 +114,7 @@ func main() {
 		primary.WalletConfig{},
 	)
 	if err != nil {
-		log.Fatalf("Failed to create fuji wallet: %v", err)
+		return fmt.Errorf("failed to create fuji wallet: %w", err)
 	}
 	fmt.Println("Fuji wallet created successfully!")
 
@@ -127,7 +133,7 @@ func main() {
 	fmt.Println("\n1. Building and issuing CreateSubnet transaction...")
 	createSubnetTx, err := buildAndSignCreateSubnetTx(wallet, owners)
 	if err != nil {
-		log.Fatalf("Failed to create CreateSubnet tx: %v", err)
+		return fmt.Errorf("failed to create CreateSubnet tx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", createSubnetTx.ID())
 
@@ -136,7 +142,7 @@ func main() {
 	defer issueCancel()
 
 	if err := wallet.P().IssueTx(createSubnetTx, common.WithContext(issueCtx)); err != nil {
-		log.Fatalf("Failed to issue CreateSubnet tx: %v", err)
+		return fmt.Errorf("failed to issue CreateSubnet tx: %w", err)
 	}
 	fmt.Println("   ✓ CreateSubnet transaction issued successfully!")
 
@@ -148,7 +154,7 @@ func main() {
 	fmt.Println("\n2. Building CreateChain transaction...")
 	createChainTx, err := buildAndSignCreateChainTx(wallet, subnetID)
 	if err != nil {
-		log.Fatalf("Failed to create CreateChain tx: %v", err)
+		return fmt.Errorf("failed to create CreateChain tx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", createChainTx.ID())
 
@@ -156,7 +162,7 @@ func main() {
 	fmt.Println("\n3. Building AddSubnetValidator transaction...")
 	addValidatorTx, err := buildAndSignAddSubnetValidatorTx(wallet, subnetID, controlKeys[0])
 	if err != nil {
-		log.Fatalf("Failed to create AddSubnetValidator tx: %v", err)
+		return fmt.Errorf("failed to create AddSubnetValidator tx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", addValidatorTx.ID())
 
@@ -164,7 +170,7 @@ func main() {
 	fmt.Println("\n4. Building RemoveSubnetValidator transaction...")
 	removeValidatorTx, err := buildAndSignRemoveSubnetValidatorTx(wallet, subnetID)
 	if err != nil {
-		log.Fatalf("Failed to create RemoveSubnetValidator tx: %v", err)
+		return fmt.Errorf("failed to create RemoveSubnetValidator tx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", removeValidatorTx.ID())
 
@@ -172,7 +178,7 @@ func main() {
 	fmt.Println("\n5. Building TransferSubnetOwnership transaction...")
 	transferOwnershipTx, err := buildAndSignTransferSubnetOwnershipTx(wallet, subnetID, owners)
 	if err != nil {
-		log.Fatalf("Failed to create TransferSubnetOwnership tx: %v", err)
+		return fmt.Errorf("failed to create TransferSubnetOwnership tx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", transferOwnershipTx.ID())
 
@@ -180,7 +186,7 @@ func main() {
 	fmt.Println("\n6. Building and issuing ConvertSubnetToL1 transaction...")
 	convertL1Tx, err := buildAndSignConvertSubnetToL1Tx(wallet, subnetID, controlKeys)
 	if err != nil {
-		log.Fatalf("Failed to create ConvertSubnetToL1 tx: %v", err)
+		return fmt.Errorf("failed to create ConvertSubnetToL1 tx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", convertL1Tx.ID())
 
@@ -189,7 +195,7 @@ func main() {
 	defer convertIssueCancel()
 
 	if err := wallet.P().IssueTx(convertL1Tx, common.WithContext(convertIssueCtx)); err != nil {
-		log.Fatalf("Failed to issue ConvertSubnetToL1 tx: %v", err)
+		return fmt.Errorf("failed to issue ConvertSubnetToL1 tx: %w", err)
 	}
 	fmt.Println("   ✓ ConvertSubnetToL1 transaction issued successfully!")
 
@@ -202,7 +208,7 @@ func main() {
 	fmt.Println("\n7. Building BaseTx transaction...")
 	baseTx, err := buildAndSignBaseTx(wallet, controlKeys[0])
 	if err != nil {
-		log.Fatalf("Failed to create BaseTx: %v", err)
+		return fmt.Errorf("failed to create BaseTx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", baseTx.ID())
 
@@ -210,7 +216,7 @@ func main() {
 	fmt.Println("\n8. Building AddValidator transaction...")
 	addPrimaryValidatorTx, err := buildAndSignAddValidatorTx(wallet, controlKeys[0])
 	if err != nil {
-		log.Fatalf("Failed to create AddValidator tx: %v", err)
+		return fmt.Errorf("failed to create AddValidator tx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", addPrimaryValidatorTx.ID())
 
@@ -218,7 +224,7 @@ func main() {
 	fmt.Println("\n9. Building AddDelegator transaction...")
 	addDelegatorTx, err := buildAndSignAddDelegatorTx(wallet, controlKeys[0])
 	if err != nil {
-		log.Fatalf("Failed to create AddDelegator tx: %v", err)
+		return fmt.Errorf("failed to create AddDelegator tx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", addDelegatorTx.ID())
 
@@ -226,7 +232,7 @@ func main() {
 	fmt.Println("\n10. Building and issuing ExportTx transaction (using Fuji network)...")
 	exportTx, err := buildAndSignPChainExportTx(fujiWallet, owners, fujiWallet.X().Builder().Context().BlockchainID)
 	if err != nil {
-		log.Fatalf("Failed to create ExportTx: %v", err)
+		return fmt.Errorf("failed to create ExportTx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", exportTx.ID())
 
@@ -235,7 +241,7 @@ func main() {
 	defer pExportIssueCancel()
 
 	if err := fujiWallet.P().IssueTx(exportTx, common.WithContext(pExportIssueCtx)); err != nil {
-		log.Fatalf("Failed to issue P-Chain ExportTx: %v", err)
+		return fmt.Errorf("failed to issue P-Chain ExportTx: %w", err)
 	}
 	fmt.Println("   ✓ P-Chain ExportTx issued successfully!")
 
@@ -243,7 +249,7 @@ func main() {
 	fmt.Println("\n11. Building and issuing X-Chain ImportTx (from P-Chain)...")
 	xChainImportTx, err := buildAndSignXChainImportTx(fujiWallet, owners, constants.PlatformChainID)
 	if err != nil {
-		log.Fatalf("Failed to create X-Chain ImportTx: %v", err)
+		return fmt.Errorf("failed to create X-Chain ImportTx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", xChainImportTx.ID())
 
@@ -252,7 +258,7 @@ func main() {
 	defer xImportIssueCancel()
 
 	if err := fujiWallet.X().IssueTx(xChainImportTx, common.WithContext(xImportIssueCtx)); err != nil {
-		log.Fatalf("Failed to issue X-Chain ImportTx: %v", err)
+		return fmt.Errorf("failed to issue X-Chain ImportTx: %w", err)
 	}
 	fmt.Println("   ✓ X-Chain ImportTx issued successfully!")
 
@@ -260,7 +266,7 @@ func main() {
 	fmt.Println("\n12. Building and issuing X-Chain ExportTx (to enable P-Chain import)...")
 	xChainExportTx, err := buildAndSignXChainExportTx(fujiWallet, owners, constants.PlatformChainID)
 	if err != nil {
-		log.Fatalf("Failed to create X-Chain ExportTx: %v", err)
+		return fmt.Errorf("failed to create X-Chain ExportTx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", xChainExportTx.ID())
 
@@ -269,7 +275,7 @@ func main() {
 	defer xExportIssueCancel()
 
 	if err := fujiWallet.X().IssueTx(xChainExportTx, common.WithContext(xExportIssueCtx)); err != nil {
-		log.Fatalf("Failed to issue X-Chain ExportTx: %v", err)
+		return fmt.Errorf("failed to issue X-Chain ExportTx: %w", err)
 	}
 	fmt.Println("   ✓ X-Chain ExportTx issued successfully!")
 
@@ -277,7 +283,7 @@ func main() {
 	fmt.Println("\n13. Building X-Chain BaseTx (without issuance)...")
 	xChainBaseTx, err := buildAndSignXChainBaseTx(fujiWallet, controlKeys[0])
 	if err != nil {
-		log.Fatalf("Failed to create X-Chain BaseTx: %v", err)
+		return fmt.Errorf("failed to create X-Chain BaseTx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", xChainBaseTx.ID())
 
@@ -285,7 +291,7 @@ func main() {
 	fmt.Println("\n14. Building X-Chain CreateAssetTx (without issuance)...")
 	xChainCreateAssetTx, err := buildAndSignXChainCreateAssetTx(fujiWallet, controlKeys[0])
 	if err != nil {
-		log.Fatalf("Failed to create X-Chain CreateAssetTx: %v", err)
+		return fmt.Errorf("failed to create X-Chain CreateAssetTx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", xChainCreateAssetTx.ID())
 
@@ -293,25 +299,25 @@ func main() {
 	fmt.Println("\n15. Building X-Chain OperationTx (without issuance)...")
 	xChainOperationTx, err := buildAndSignXChainOperationTx(fujiWallet)
 	if err != nil {
-		log.Fatalf("Failed to create X-Chain OperationTx: %v", err)
+		return fmt.Errorf("failed to create X-Chain OperationTx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", xChainOperationTx.ID())
 
 	// 16. P-Chain ExportTx to C-Chain
 	fmt.Println("\n16. Building and issuing P-Chain ExportTx to C-Chain...")
 	cChainID := fujiWallet.C().Builder().Context().BlockchainID
-	pToC_ExportTx, err := buildAndSignPChainExportTx(fujiWallet, owners, cChainID)
+	pToCExportTx, err := buildAndSignPChainExportTx(fujiWallet, owners, cChainID)
 	if err != nil {
-		log.Fatalf("Failed to create P-Chain ExportTx to C-Chain: %v", err)
+		return fmt.Errorf("failed to create P-Chain ExportTx to C-Chain: %w", err)
 	}
-	fmt.Printf("   Tx ID: %s\n", pToC_ExportTx.ID())
+	fmt.Printf("   Tx ID: %s\n", pToCExportTx.ID())
 
 	fmt.Println("   Issuing P-Chain ExportTx to C-Chain to network...")
-	pToC_ExportIssueCtx, pToC_ExportIssueCancel := context.WithTimeout(context.Background(), 30*time.Second)
-	defer pToC_ExportIssueCancel()
+	pToCExportIssueCtx, pToCExportIssueCancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer pToCExportIssueCancel()
 
-	if err := fujiWallet.P().IssueTx(pToC_ExportTx, common.WithContext(pToC_ExportIssueCtx)); err != nil {
-		log.Fatalf("Failed to issue P-Chain ExportTx to C-Chain: %v", err)
+	if err := fujiWallet.P().IssueTx(pToCExportTx, common.WithContext(pToCExportIssueCtx)); err != nil {
+		return fmt.Errorf("failed to issue P-Chain ExportTx to C-Chain: %w", err)
 	}
 	fmt.Println("   ✓ P-Chain ExportTx to C-Chain issued successfully!")
 
@@ -319,13 +325,13 @@ func main() {
 	fmt.Println("\n17. Building and issuing C-Chain ImportTx from P-Chain...")
 	pubKey, err := ledgerDevice.PubKey(0)
 	if err != nil {
-		log.Fatalf("Failed to get pubKey from Ledger: %v", err)
+		return fmt.Errorf("failed to get pubKey from Ledger: %w", err)
 	}
 	ethAddr := pubKey.EthAddress()
 	fmt.Println("ETH ADDR:", ethAddr)
 	cChainImportTx, err := buildAndSignCChainImportTx(fujiWallet, ethAddr, constants.PlatformChainID)
 	if err != nil {
-		log.Fatalf("Failed to create C-Chain ImportTx: %v", err)
+		return fmt.Errorf("failed to create C-Chain ImportTx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", cChainImportTx.ID())
 
@@ -334,7 +340,7 @@ func main() {
 	defer cImportIssueCancel()
 
 	if err := fujiWallet.C().IssueAtomicTx(cChainImportTx, common.WithContext(cImportIssueCtx)); err != nil {
-		log.Fatalf("Failed to issue C-Chain ImportTx: %v", err)
+		return fmt.Errorf("failed to issue C-Chain ImportTx: %w", err)
 	}
 	fmt.Println("   ✓ C-Chain ImportTx issued successfully!")
 
@@ -342,7 +348,7 @@ func main() {
 	fmt.Println("\n18. Building and issuing C-Chain ExportTx to P-Chain...")
 	cChainExportTx, err := buildAndSignCChainExportTx(fujiWallet, owners, constants.PlatformChainID)
 	if err != nil {
-		log.Fatalf("Failed to create C-Chain ExportTx: %v", err)
+		return fmt.Errorf("failed to create C-Chain ExportTx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", cChainExportTx.ID())
 
@@ -351,24 +357,24 @@ func main() {
 	defer cExportIssueCancel()
 
 	if err := fujiWallet.C().IssueAtomicTx(cChainExportTx, common.WithContext(cExportIssueCtx)); err != nil {
-		log.Fatalf("Failed to issue C-Chain ExportTx: %v", err)
+		return fmt.Errorf("failed to issue C-Chain ExportTx: %w", err)
 	}
 	fmt.Println("   ✓ C-Chain ExportTx issued successfully!")
 
 	// 19. P-Chain ImportTx from C-Chain
 	fmt.Println("\n19. Building and issuing P-Chain ImportTx from C-Chain...")
-	cToP_ImportTx, err := buildAndSignPChainImportTx(fujiWallet, owners, cChainID)
+	cToPImportTx, err := buildAndSignPChainImportTx(fujiWallet, owners, cChainID)
 	if err != nil {
-		log.Fatalf("Failed to create P-Chain ImportTx from C-Chain: %v", err)
+		return fmt.Errorf("failed to create P-Chain ImportTx from C-Chain: %w", err)
 	}
-	fmt.Printf("   Tx ID: %s\n", cToP_ImportTx.ID())
+	fmt.Printf("   Tx ID: %s\n", cToPImportTx.ID())
 
 	fmt.Println("   Issuing P-Chain ImportTx from C-Chain to network...")
-	cToP_ImportIssueCtx, cToP_ImportIssueCancel := context.WithTimeout(context.Background(), 30*time.Second)
-	defer cToP_ImportIssueCancel()
+	cToPImportIssueCtx, cToPImportIssueCancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cToPImportIssueCancel()
 
-	if err := fujiWallet.P().IssueTx(cToP_ImportTx, common.WithContext(cToP_ImportIssueCtx)); err != nil {
-		log.Fatalf("Failed to issue P-Chain ImportTx from C-Chain: %v", err)
+	if err := fujiWallet.P().IssueTx(cToPImportTx, common.WithContext(cToPImportIssueCtx)); err != nil {
+		return fmt.Errorf("failed to issue P-Chain ImportTx from C-Chain: %w", err)
 	}
 	fmt.Println("   ✓ P-Chain ImportTx from C-Chain issued successfully!")
 
@@ -376,7 +382,7 @@ func main() {
 	fmt.Println("\n20. Building and issuing P-Chain ImportTx from X-Chain...")
 	importTx, err := buildAndSignPChainImportTx(fujiWallet, owners, fujiWallet.X().Builder().Context().BlockchainID)
 	if err != nil {
-		log.Fatalf("Failed to create ImportTx: %v", err)
+		return fmt.Errorf("failed to create ImportTx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", importTx.ID())
 
@@ -385,7 +391,7 @@ func main() {
 	defer pImportIssueCancel()
 
 	if err := fujiWallet.P().IssueTx(importTx, common.WithContext(pImportIssueCtx)); err != nil {
-		log.Fatalf("Failed to issue P-Chain ImportTx: %v", err)
+		return fmt.Errorf("failed to issue P-Chain ImportTx: %w", err)
 	}
 	fmt.Println("   ✓ P-Chain ImportTx issued successfully!")
 
@@ -393,7 +399,7 @@ func main() {
 	fmt.Println("\n21. Building AddPermissionlessValidator transaction...")
 	addPermissionlessValidatorTx, err := buildAndSignAddPermissionlessValidatorTx(wallet, subnetID, controlKeys[0])
 	if err != nil {
-		log.Fatalf("Failed to create AddPermissionlessValidator tx: %v", err)
+		return fmt.Errorf("failed to create AddPermissionlessValidator tx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", addPermissionlessValidatorTx.ID())
 
@@ -401,7 +407,7 @@ func main() {
 	fmt.Println("\n22. Building AddPermissionlessDelegator transaction...")
 	addPermissionlessDelegatorTx, err := buildAndSignAddPermissionlessDelegatorTx(wallet, subnetID, controlKeys[0])
 	if err != nil {
-		log.Fatalf("Failed to create AddPermissionlessDelegator tx: %v", err)
+		return fmt.Errorf("failed to create AddPermissionlessDelegator tx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", addPermissionlessDelegatorTx.ID())
 
@@ -409,7 +415,7 @@ func main() {
 	fmt.Println("\n23. Building TransformSubnet transaction...")
 	transformSubnetTx, err := buildAndSignTransformSubnetTx(wallet, subnetID)
 	if err != nil {
-		log.Fatalf("Failed to create TransformSubnet tx: %v", err)
+		return fmt.Errorf("failed to create TransformSubnet tx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", transformSubnetTx.ID())
 
@@ -417,7 +423,7 @@ func main() {
 	fmt.Println("\n24. Building RegisterL1Validator transaction...")
 	registerL1ValidatorTx, err := buildAndSignRegisterL1ValidatorTx(wallet)
 	if err != nil {
-		log.Fatalf("Failed to create RegisterL1Validator tx: %v", err)
+		return fmt.Errorf("failed to create RegisterL1Validator tx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", registerL1ValidatorTx.ID())
 
@@ -425,7 +431,7 @@ func main() {
 	fmt.Println("\n25. Building SetL1ValidatorWeight transaction...")
 	setL1ValidatorWeightTx, err := buildAndSignSetL1ValidatorWeightTx(wallet)
 	if err != nil {
-		log.Fatalf("Failed to create SetL1ValidatorWeight tx: %v", err)
+		return fmt.Errorf("failed to create SetL1ValidatorWeight tx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", setL1ValidatorWeightTx.ID())
 
@@ -433,7 +439,7 @@ func main() {
 	fmt.Println("\n26. Building IncreaseL1ValidatorBalance transaction...")
 	increaseL1ValidatorBalanceTx, err := buildAndSignIncreaseL1ValidatorBalanceTx(wallet, validationID)
 	if err != nil {
-		log.Fatalf("Failed to create IncreaseL1ValidatorBalance tx: %v", err)
+		return fmt.Errorf("failed to create IncreaseL1ValidatorBalance tx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", increaseL1ValidatorBalanceTx.ID())
 
@@ -441,12 +447,14 @@ func main() {
 	fmt.Println("\n27. Building DisableL1Validator transaction...")
 	disableL1ValidatorTx, err := buildAndSignDisableL1ValidatorTx(wallet, validationID)
 	if err != nil {
-		log.Fatalf("Failed to create DisableL1Validator tx: %v", err)
+		return fmt.Errorf("failed to create DisableL1Validator tx: %w", err)
 	}
 	fmt.Printf("   Tx ID: %s\n", disableL1ValidatorTx.ID())
 
 	fmt.Println("\n✓ All transactions created and signed successfully!")
 	fmt.Println("Note: Some transactions were issued to the network for demonstration. Others were only built and signed.")
+
+	return nil
 }
 
 func buildAndSignCreateSubnetTx(wallet *primary.Wallet, owners *secp256k1fx.OutputOwners) (*txs.Tx, error) {
@@ -504,11 +512,20 @@ func buildAndSignAddSubnetValidatorTx(wallet *primary.Wallet, subnetID ids.ID, n
 	endTime := startTime.Add(24 * time.Hour)
 	weight := uint64(1000)
 
+	startUnix := startTime.Unix()
+	if startUnix < 0 {
+		return nil, fmt.Errorf("invalid start time: %d", startUnix)
+	}
+	endUnix := endTime.Unix()
+	if endUnix < 0 {
+		return nil, fmt.Errorf("invalid end time: %d", endUnix)
+	}
+
 	validator := &txs.SubnetValidator{
 		Validator: txs.Validator{
 			NodeID: nodeID,
-			Start:  uint64(startTime.Unix()),
-			End:    uint64(endTime.Unix()),
+			Start:  uint64(startUnix),
+			End:    uint64(endUnix),
 			Wght:   weight,
 		},
 		Subnet: subnetID,
@@ -665,10 +682,19 @@ func buildAndSignAddValidatorTx(wallet *primary.Wallet, rewardsAddr ids.ShortID)
 	weight := uint64(2000000000)
 	shares := uint32(20000)
 
+	startUnix := startTime.Unix()
+	if startUnix < 0 {
+		return nil, fmt.Errorf("invalid start time: %d", startUnix)
+	}
+	endUnix := endTime.Unix()
+	if endUnix < 0 {
+		return nil, fmt.Errorf("invalid end time: %d", endUnix)
+	}
+
 	validator := &txs.Validator{
 		NodeID: nodeID,
-		Start:  uint64(startTime.Unix()),
-		End:    uint64(endTime.Unix()),
+		Start:  uint64(startUnix),
+		End:    uint64(endUnix),
 		Wght:   weight,
 	}
 
@@ -701,10 +727,19 @@ func buildAndSignAddDelegatorTx(wallet *primary.Wallet, rewardsAddr ids.ShortID)
 	endTime := startTime.Add(24 * time.Hour)
 	weight := uint64(25000000)
 
+	startUnix := startTime.Unix()
+	if startUnix < 0 {
+		return nil, fmt.Errorf("invalid start time: %d", startUnix)
+	}
+	endUnix := endTime.Unix()
+	if endUnix < 0 {
+		return nil, fmt.Errorf("invalid end time: %d", endUnix)
+	}
+
 	validator := &txs.Validator{
 		NodeID: nodeID,
-		Start:  uint64(startTime.Unix()),
-		End:    uint64(endTime.Unix()),
+		Start:  uint64(startUnix),
+		End:    uint64(endUnix),
 		Wght:   weight,
 	}
 
@@ -926,15 +961,22 @@ func buildAndSignPChainExportTx(wallet *primary.Wallet, to *secp256k1fx.OutputOw
 
 func buildAndSignAddPermissionlessValidatorTx(wallet *primary.Wallet, subnetID ids.ID, rewardsAddr ids.ShortID) (*txs.Tx, error) {
 	nodeID := ids.GenerateTestNodeID()
-	startTime := uint64(time.Now().Add(1 * time.Hour).Unix())
-	endTime := uint64(time.Now().Add(25 * time.Hour).Unix())
 	weight := uint64(1000)
+
+	startUnix := time.Now().Add(1 * time.Hour).Unix()
+	if startUnix < 0 {
+		return nil, fmt.Errorf("invalid start time: %d", startUnix)
+	}
+	endUnix := time.Now().Add(25 * time.Hour).Unix()
+	if endUnix < 0 {
+		return nil, fmt.Errorf("invalid end time: %d", endUnix)
+	}
 
 	validator := &txs.SubnetValidator{
 		Validator: txs.Validator{
 			NodeID: nodeID,
-			Start:  startTime,
-			End:    endTime,
+			Start:  uint64(startUnix),
+			End:    uint64(endUnix),
 			Wght:   weight,
 		},
 		Subnet: subnetID,
@@ -972,15 +1014,22 @@ func buildAndSignAddPermissionlessValidatorTx(wallet *primary.Wallet, subnetID i
 
 func buildAndSignAddPermissionlessDelegatorTx(wallet *primary.Wallet, subnetID ids.ID, rewardsAddr ids.ShortID) (*txs.Tx, error) {
 	nodeID := ids.GenerateTestNodeID()
-	startTime := uint64(time.Now().Add(1 * time.Hour).Unix())
-	endTime := uint64(time.Now().Add(25 * time.Hour).Unix())
 	weight := uint64(500)
+
+	startUnix := time.Now().Add(1 * time.Hour).Unix()
+	if startUnix < 0 {
+		return nil, fmt.Errorf("invalid start time: %d", startUnix)
+	}
+	endUnix := time.Now().Add(25 * time.Hour).Unix()
+	if endUnix < 0 {
+		return nil, fmt.Errorf("invalid end time: %d", endUnix)
+	}
 
 	validator := &txs.SubnetValidator{
 		Validator: txs.Validator{
 			NodeID: nodeID,
-			Start:  startTime,
-			End:    endTime,
+			Start:  uint64(startUnix),
+			End:    uint64(endUnix),
 			Wght:   weight,
 		},
 		Subnet: subnetID,
@@ -1020,7 +1069,11 @@ func buildAndSignRegisterL1ValidatorTx(wallet *primary.Wallet) (*txs.Tx, error) 
 	subnetID := ids.GenerateTestID()
 	nodeID := ids.GenerateTestNodeID()
 	blsPublicKey := [48]byte{}
-	expiry := uint64(time.Now().Add(24 * time.Hour).Unix())
+	expiryUnix := time.Now().Add(24 * time.Hour).Unix()
+	if expiryUnix < 0 {
+		return nil, fmt.Errorf("invalid expiry time: %d", expiryUnix)
+	}
+	expiry := uint64(expiryUnix)
 	weight := uint64(1000)
 
 	balanceOwners := message.PChainOwner{

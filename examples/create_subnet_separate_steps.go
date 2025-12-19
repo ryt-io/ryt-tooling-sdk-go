@@ -52,15 +52,20 @@ func CreateSubnetSeparateSteps() error {
 	}
 
 	// Import account from private key
-	accountSpec := account.AccountSpec{
-		PrivateKey: privateKey,
+	localAccount, err := account.ImportFromPrivateKey("my-account", privateKey)
+	if err != nil {
+		return fmt.Errorf("failed to create account from private key: %w", err)
 	}
-	accountInfo, err := localWallet.ImportAccount("my-account", accountSpec)
+	err = localWallet.ImportAccount(localAccount)
 	if err != nil {
 		return fmt.Errorf("failed to import account: %w", err)
 	}
-	fmt.Printf("Imported account: %s\n", accountInfo.Name)
-	fmt.Printf("  P-Chain: %s\n", accountInfo.PAddress)
+	pAddr, err := localAccount.GetPChainAddress(net)
+	if err != nil {
+		return fmt.Errorf("failed to get P-Chain address: %w", err)
+	}
+	fmt.Printf("Imported account: %s\n", localAccount.Name())
+	fmt.Printf("  P-Chain: %s\n", pAddr)
 
 	// Create subnet transaction parameters
 	createSubnetParams := &pchainTxs.CreateSubnetTxParams{
@@ -73,7 +78,7 @@ func CreateSubnetSeparateSteps() error {
 	buildTxParams := types.BuildTxParams{
 		BuildTxInput: createSubnetParams,
 	}
-	buildTxResult, err := localWallet.BuildTx(ctx, buildTxParams)
+	buildTxResult, err := localWallet.Primary().BuildTx(ctx, buildTxParams)
 	if err != nil {
 		return fmt.Errorf("failed to build tx: %w", err)
 	}
@@ -84,7 +89,7 @@ func CreateSubnetSeparateSteps() error {
 	signTxParams := types.SignTxParams{
 		BuildTxResult: &buildTxResult,
 	}
-	signTxResult, err := localWallet.SignTx(ctx, signTxParams)
+	signTxResult, err := localWallet.Primary().SignTx(ctx, signTxParams)
 	if err != nil {
 		return fmt.Errorf("failed to sign tx: %w", err)
 	}
@@ -95,7 +100,7 @@ func CreateSubnetSeparateSteps() error {
 	sendTxParams := types.SendTxParams{
 		SignTxResult: &signTxResult,
 	}
-	sendTxResult, err := localWallet.SendTx(ctx, sendTxParams)
+	sendTxResult, err := localWallet.Primary().SendTx(ctx, sendTxParams)
 	if err != nil {
 		return fmt.Errorf("failed to send tx: %w", err)
 	}

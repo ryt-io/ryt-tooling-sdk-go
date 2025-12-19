@@ -127,15 +127,20 @@ func ConvertSubnet() error {
 	}
 
 	// Import account from private key
-	accountSpec := account.AccountSpec{
-		PrivateKey: privateKey,
+	localAccount, err := account.ImportFromPrivateKey("my-account", privateKey)
+	if err != nil {
+		return fmt.Errorf("failed to create account from private key: %w", err)
 	}
-	accountInfo, err := localWallet.ImportAccount("my-account", accountSpec)
+	err = localWallet.ImportAccount(localAccount)
 	if err != nil {
 		return fmt.Errorf("failed to import account: %w", err)
 	}
-	fmt.Printf("Imported account: %s\n", accountInfo.Name)
-	fmt.Printf("  P-Chain: %s\n", accountInfo.PAddress)
+	pAddr, err := localAccount.GetPChainAddress(net)
+	if err != nil {
+		return fmt.Errorf("failed to get P-Chain address: %w", err)
+	}
+	fmt.Printf("Imported account: %s\n", localAccount.Name())
+	fmt.Printf("  P-Chain: %s\n", pAddr)
 
 	// Create bootstrap validator
 	bootstrapValidator := &pchainTxs.ConvertSubnetToL1Validator{
@@ -160,7 +165,7 @@ func ConvertSubnet() error {
 	submitTxParams := types.SubmitTxParams{
 		BuildTxInput: convertSubnetParams,
 	}
-	submitTxResult, err := localWallet.SubmitTx(ctx, submitTxParams)
+	submitTxResult, err := localWallet.Primary().SubmitTx(ctx, submitTxParams)
 	if err != nil {
 		return fmt.Errorf("failed to submit tx: %w", err)
 	}

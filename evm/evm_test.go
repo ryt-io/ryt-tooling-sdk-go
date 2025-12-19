@@ -1806,7 +1806,6 @@ func TestTransactWithWarpMessage(t *testing.T) {
 	require.NoError(t, err)
 	secondarySigner, err := NewNoOpSigner(secondarySignerAddress)
 	require.NoError(t, err)
-	defaultGasLimit := uint64(2_000_000)
 	tests := []struct {
 		name          string
 		signer        *Signer
@@ -1920,7 +1919,8 @@ func TestTransactWithWarpMessage(t *testing.T) {
 						Return(uint64(0), errors.New("failed to estimate gas"))
 				}
 			},
-			expectedGas: defaultGasLimit,
+			expectError:   true,
+			errorContains: "failure estimating gas limit",
 		},
 		{
 			name:        "signer failure",
