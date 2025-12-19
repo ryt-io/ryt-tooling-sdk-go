@@ -41,7 +41,7 @@ func (p *primaryOperations) BuildTx(ctx context.Context, params types.BuildTxPar
 	if len(params.AccountNames) > 0 {
 		accountToUse = p.localWallet.accounts[params.AccountNames[0]]
 	} else {
-		accountToUse = p.localWallet.accounts[p.localWallet.activeAccount]
+		accountToUse = p.localWallet.accounts[p.localWallet.activeAccountName]
 	}
 
 	return wallet.BuildTx(walletToUse, accountToUse, params)
@@ -134,14 +134,14 @@ func (p *primaryOperations) getWalletToUse(ctx context.Context, accountNames []s
 			return nil, fmt.Errorf("account %q not found", accountName)
 		}
 		config := buildWalletConfig(params)
-		tempWallet, err := getWalletFromAccount(ctx, acc, p.localWallet.defaultNetwork, &config)
+		tempWallet, err := createPrimaryWallet(ctx, acc, p.localWallet.activeNetwork, &config)
 		if err != nil {
 			return nil, fmt.Errorf("error creating wallet for account: %w", err)
 		}
 		return tempWallet, nil
 	}
 	// Use the existing wallet (with active account)
-	if p.localWallet.activeAccount == "" {
+	if p.localWallet.activeAccountName == "" {
 		return nil, fmt.Errorf("no account specified and no active account set")
 	}
 
@@ -152,17 +152,17 @@ func (p *primaryOperations) getWalletToUse(ctx context.Context, accountNames []s
 		if subnetID != ids.Empty && !p.hasSeenSubnetID(subnetID) {
 			// New subnet ID detected, rebuild wallet with all seen subnet IDs
 			p.localWallet.seenSubnetIDs = append(p.localWallet.seenSubnetIDs, subnetID)
-			acc := p.localWallet.accounts[p.localWallet.activeAccount]
+			acc := p.localWallet.accounts[p.localWallet.activeAccountName]
 			newConfig := primary.WalletConfig{SubnetIDs: p.localWallet.seenSubnetIDs}
-			newWallet, err := getWalletFromAccount(ctx, acc, p.localWallet.defaultNetwork, &newConfig)
+			newWallet, err := createPrimaryWallet(ctx, acc, p.localWallet.activeNetwork, &newConfig)
 			if err != nil {
 				return nil, fmt.Errorf("error refreshing wallet with new subnet ID: %w", err)
 			}
-			p.localWallet.wallet = newWallet
+			p.localWallet.primaryWallet = newWallet
 		}
 	}
 
-	return p.localWallet.wallet, nil
+	return p.localWallet.primaryWallet, nil
 }
 
 // buildWalletConfig creates a WalletConfig with appropriate SubnetIDs based on transaction type

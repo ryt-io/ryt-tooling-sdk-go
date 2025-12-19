@@ -15,35 +15,35 @@ import (
 
 // LocalWallet represents a local wallet implementation
 type LocalWallet struct {
-	wallet         *primary.Wallet            // Primary wallet for P/X/C operations
-	accounts       map[string]account.Account // Named accounts map
-	activeAccount  string                     // Currently active account name
-	defaultNetwork network.Network            // Default network for operations
-	seenSubnetIDs  []ids.ID                   // Subnet IDs seen for active account
+	primaryWallet     *primary.Wallet            // Avalanchego primary wallet for P/X/C operations
+	accounts          map[string]account.Account // Named accounts map
+	activeAccountName string                     // Currently active account name
+	activeNetwork     network.Network            // Active network for operations
+	seenSubnetIDs     []ids.ID                   // Subnet IDs seen for active account
 }
 
 // Ensure LocalWallet implements Wallet interface
 var _ wallet.Wallet = (*LocalWallet)(nil)
 
 // NewLocalWallet creates a new local wallet with the specified network
-func NewLocalWallet(net network.Network) (*LocalWallet, error) {
+func NewLocalWallet(network network.Network) (*LocalWallet, error) {
 	return &LocalWallet{
-		wallet:         nil,
-		accounts:       make(map[string]account.Account),
-		activeAccount:  "",
-		defaultNetwork: net,
-		seenSubnetIDs:  []ids.ID{},
+		primaryWallet:     nil,
+		accounts:          make(map[string]account.Account),
+		activeAccountName: "",
+		activeNetwork:     network,
+		seenSubnetIDs:     []ids.ID{},
 	}, nil
 }
 
-// SetNetwork sets the default network for wallet operations
-func (w *LocalWallet) SetNetwork(net network.Network) {
-	w.defaultNetwork = net
+// SetNetwork sets the active network for wallet operations
+func (w *LocalWallet) SetNetwork(network network.Network) {
+	w.activeNetwork = network
 }
 
-// Network returns the default network for wallet operations
+// Network returns the active network for wallet operations
 func (w *LocalWallet) Network() network.Network {
-	return w.defaultNetwork
+	return w.activeNetwork
 }
 
 // Primary returns the interface for P/X/C chain operations
