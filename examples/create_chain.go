@@ -12,14 +12,14 @@ import (
 
 	"github.com/ava-labs/avalanchego/utils/logging"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/account"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/blockchain"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/network"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/utils"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/wallet/local"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/wallet/types"
+	"github.com/ryt-io/ryt-tooling-sdk-go/account"
+	"github.com/ryt-io/ryt-tooling-sdk-go/blockchain"
+	"github.com/ryt-io/ryt-tooling-sdk-go/network"
+	"github.com/ryt-io/ryt-tooling-sdk-go/utils"
+	"github.com/ryt-io/ryt-tooling-sdk-go/wallet/local"
+	"github.com/ryt-io/ryt-tooling-sdk-go/wallet/types"
 
-	pchainTxs "github.com/ava-labs/avalanche-tooling-sdk-go/wallet/txs/p-chain"
+	pchainTxs "github.com/ryt-io/ryt-tooling-sdk-go/wallet/txs/p-chain"
 	avagoTxs "github.com/ava-labs/avalanchego/vms/platformvm/txs"
 )
 

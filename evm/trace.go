@@ -8,7 +8,7 @@ import (
 
 	"github.com/ava-labs/subnet-evm/rpc"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/utils"
+	"github.com/ryt-io/ryt-tooling-sdk-go/utils"
 )
 
 // also used at mocks

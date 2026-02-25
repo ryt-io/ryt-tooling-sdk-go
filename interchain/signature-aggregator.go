@@ -16,7 +16,7 @@ import (
 	"github.com/ava-labs/icm-services/signature-aggregator/api"
 	"go.uber.org/zap"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/utils"
+	"github.com/ryt-io/ryt-tooling-sdk-go/utils"
 )
 
 const (

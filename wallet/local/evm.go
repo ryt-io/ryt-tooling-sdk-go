@@ -10,10 +10,10 @@ import (
 
 	"github.com/ava-labs/avalanchego/vms/platformvm/warp"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/account"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/evm"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/evm/contract"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/wallet"
+	"github.com/ryt-io/ryt-tooling-sdk-go/account"
+	"github.com/ryt-io/ryt-tooling-sdk-go/evm"
+	"github.com/ryt-io/ryt-tooling-sdk-go/evm/contract"
+	"github.com/ryt-io/ryt-tooling-sdk-go/wallet"
 
 	ethereum "github.com/ava-labs/libevm"
 	ethCommon "github.com/ava-labs/libevm/common"

@@ -9,9 +9,9 @@ import (
 	"github.com/ava-labs/avalanchego/utils/formatting/address"
 	"github.com/ava-labs/avalanchego/vms/platformvm"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/keychain/ledger"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/network"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/utils"
+	"github.com/ryt-io/ryt-tooling-sdk-go/keychain/ledger"
+	"github.com/ryt-io/ryt-tooling-sdk-go/network"
+	"github.com/ryt-io/ryt-tooling-sdk-go/utils"
 )
 
 const (

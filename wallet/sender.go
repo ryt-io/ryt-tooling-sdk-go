@@ -7,8 +7,8 @@ import (
 
 	"github.com/ava-labs/avalanchego/wallet/subnet/primary"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/wallet/chains/pchain"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/wallet/types"
+	"github.com/ryt-io/ryt-tooling-sdk-go/wallet/chains/pchain"
+	"github.com/ryt-io/ryt-tooling-sdk-go/wallet/types"
 )
 
 // SendTx submits a signed transaction to the Network

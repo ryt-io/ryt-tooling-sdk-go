@@ -9,11 +9,11 @@ import (
 	"github.com/ava-labs/avalanchego/ids"
 	"github.com/ava-labs/avalanchego/wallet/subnet/primary"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/account"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/wallet"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/wallet/types"
+	"github.com/ryt-io/ryt-tooling-sdk-go/account"
+	"github.com/ryt-io/ryt-tooling-sdk-go/wallet"
+	"github.com/ryt-io/ryt-tooling-sdk-go/wallet/types"
 
-	txs "github.com/ava-labs/avalanche-tooling-sdk-go/wallet/txs/p-chain"
+	txs "github.com/ryt-io/ryt-tooling-sdk-go/wallet/txs/p-chain"
 	avagoTxs "github.com/ava-labs/avalanchego/vms/platformvm/txs"
 )
 

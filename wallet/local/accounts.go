@@ -11,9 +11,9 @@ import (
 	"github.com/ava-labs/avalanchego/ids"
 	"github.com/ava-labs/avalanchego/wallet/subnet/primary"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/account"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/network"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/utils"
+	"github.com/ryt-io/ryt-tooling-sdk-go/account"
+	"github.com/ryt-io/ryt-tooling-sdk-go/network"
+	"github.com/ryt-io/ryt-tooling-sdk-go/utils"
 )
 
 // Accounts returns all accounts managed by this wallet

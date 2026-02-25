@@ -7,7 +7,7 @@ import (
 
 	"github.com/ava-labs/avalanchego/vms/platformvm/txs"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/constants"
+	"github.com/ryt-io/ryt-tooling-sdk-go/constants"
 )
 
 // SendTxOutput represents a generic interface for sent transaction results

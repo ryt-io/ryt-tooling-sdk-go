@@ -7,10 +7,10 @@ import (
 	"github.com/ava-labs/avalanchego/utils/logging"
 	"github.com/ava-labs/avalanchego/wallet/subnet/primary"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/account"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/evm"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/network"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/wallet"
+	"github.com/ryt-io/ryt-tooling-sdk-go/account"
+	"github.com/ryt-io/ryt-tooling-sdk-go/evm"
+	"github.com/ryt-io/ryt-tooling-sdk-go/network"
+	"github.com/ryt-io/ryt-tooling-sdk-go/wallet"
 )
 
 // LocalWallet represents a local wallet implementation

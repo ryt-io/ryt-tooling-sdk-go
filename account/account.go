@@ -5,7 +5,7 @@ package account
 import (
 	"github.com/ava-labs/avalanchego/vms/secp256k1fx"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/network"
+	"github.com/ryt-io/ryt-tooling-sdk-go/network"
 )
 
 // Account represents a set of X/P/C-Chain and EVM addresses derived from a single private key.

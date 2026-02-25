@@ -12,8 +12,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/network"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/interchain"
+	"github.com/ryt-io/ryt-tooling-sdk-go/network"
+	"github.com/ryt-io/ryt-tooling-sdk-go/interchain"
 	"github.com/ava-labs/avalanchego/ids"
 	"github.com/ava-labs/avalanchego/utils/logging"
 	"go.uber.org/zap"

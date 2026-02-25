@@ -1,4 +1,4 @@
-module github.com/ava-labs/avalanche-tooling-sdk-go
+module github.com/ryt-io/ryt-tooling-sdk-go
 
 go 1.24.9
 

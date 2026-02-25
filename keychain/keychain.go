@@ -8,12 +8,12 @@ import (
 	"github.com/ava-labs/avalanchego/utils/crypto/keychain"
 	"golang.org/x/exp/maps"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/key"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/ledger"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/network"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/utils"
+	"github.com/ryt-io/ryt-tooling-sdk-go/key"
+	"github.com/ryt-io/ryt-tooling-sdk-go/ledger"
+	"github.com/ryt-io/ryt-tooling-sdk-go/network"
+	"github.com/ryt-io/ryt-tooling-sdk-go/utils"
 
-	ledgerkeychain "github.com/ava-labs/avalanche-tooling-sdk-go/keychain/ledger"
+	ledgerkeychain "github.com/ryt-io/ryt-tooling-sdk-go/keychain/ledger"
 )
 
 type Keychain struct {

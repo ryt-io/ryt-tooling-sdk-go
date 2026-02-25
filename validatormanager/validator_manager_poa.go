@@ -9,8 +9,8 @@ import (
 	"github.com/ava-labs/libevm/common"
 	"github.com/ava-labs/libevm/core/types"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/evm"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/evm/contract"
+	"github.com/ryt-io/ryt-tooling-sdk-go/evm"
+	"github.com/ryt-io/ryt-tooling-sdk-go/evm/contract"
 )
 
 // PoAValidatorManagerInitialize initializes contract [managerAddress] at [rpcURL], to

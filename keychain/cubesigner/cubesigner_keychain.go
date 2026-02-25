@@ -20,8 +20,8 @@ import (
 	"github.com/cubist-labs/cubesigner-go-sdk/models"
 	"golang.org/x/exp/maps"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/constants"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/utils"
+	"github.com/ryt-io/ryt-tooling-sdk-go/constants"
+	"github.com/ryt-io/ryt-tooling-sdk-go/utils"
 
 	avagoconstants "github.com/ava-labs/avalanchego/utils/constants"
 	avasecp256k1 "github.com/ava-labs/avalanchego/utils/crypto/secp256k1"

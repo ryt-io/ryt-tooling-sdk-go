@@ -30,7 +30,7 @@ import (
 	"github.com/ava-labs/avalanchego/wallet/subnet/primary"
 	"github.com/ava-labs/avalanchego/wallet/subnet/primary/common"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/keychain/ledger"
+	"github.com/ryt-io/ryt-tooling-sdk-go/keychain/ledger"
 )
 
 func main() {

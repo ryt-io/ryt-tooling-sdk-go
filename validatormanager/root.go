@@ -16,12 +16,12 @@ import (
 	"github.com/ava-labs/libevm/common"
 	"github.com/ava-labs/libevm/core/types"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/evm"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/evm/contract"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/evm/precompiles"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/network"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/utils"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/validatormanager/validatormanagertypes"
+	"github.com/ryt-io/ryt-tooling-sdk-go/evm"
+	"github.com/ryt-io/ryt-tooling-sdk-go/evm/contract"
+	"github.com/ryt-io/ryt-tooling-sdk-go/evm/precompiles"
+	"github.com/ryt-io/ryt-tooling-sdk-go/network"
+	"github.com/ryt-io/ryt-tooling-sdk-go/utils"
+	"github.com/ryt-io/ryt-tooling-sdk-go/validatormanager/validatormanagertypes"
 
 	avagoconstants "github.com/ava-labs/avalanchego/utils/constants"
 	warpMessage "github.com/ava-labs/avalanchego/vms/platformvm/warp/message"

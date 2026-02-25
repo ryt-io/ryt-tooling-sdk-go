@@ -17,7 +17,7 @@ import (
 	"github.com/stretchr/testify/require"
 	"go.uber.org/mock/gomock"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/keychain/cubesigner/cubesignermock"
+	"github.com/ryt-io/ryt-tooling-sdk-go/keychain/cubesigner/cubesignermock"
 
 	avmtxs "github.com/ava-labs/avalanchego/vms/avm/txs"
 	platformvmtxs "github.com/ava-labs/avalanchego/vms/platformvm/txs"

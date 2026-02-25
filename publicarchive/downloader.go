@@ -18,8 +18,8 @@ import (
 	"github.com/cavaliergopher/grab/v3"
 	"go.uber.org/zap"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/constants"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/network"
+	"github.com/ryt-io/ryt-tooling-sdk-go/constants"
+	"github.com/ryt-io/ryt-tooling-sdk-go/network"
 
 	avagoConstants "github.com/ava-labs/avalanchego/utils/constants"
 )

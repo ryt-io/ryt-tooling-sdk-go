@@ -23,12 +23,12 @@ import (
 	"github.com/ava-labs/subnet-evm/params/extras"
 	"go.uber.org/zap"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/evm"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/interchain"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/network"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/utils"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/validatormanager"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/vm"
+	"github.com/ryt-io/ryt-tooling-sdk-go/evm"
+	"github.com/ryt-io/ryt-tooling-sdk-go/interchain"
+	"github.com/ryt-io/ryt-tooling-sdk-go/network"
+	"github.com/ryt-io/ryt-tooling-sdk-go/utils"
+	"github.com/ryt-io/ryt-tooling-sdk-go/validatormanager"
+	"github.com/ryt-io/ryt-tooling-sdk-go/vm"
 
 	subnetevmutils "github.com/ava-labs/subnet-evm/utils"
 )

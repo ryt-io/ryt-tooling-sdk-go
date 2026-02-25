@@ -16,10 +16,10 @@ import (
 
 	_ "embed"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/account"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/network"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/wallet"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/wallet/local"
+	"github.com/ryt-io/ryt-tooling-sdk-go/account"
+	"github.com/ryt-io/ryt-tooling-sdk-go/network"
+	"github.com/ryt-io/ryt-tooling-sdk-go/wallet"
+	"github.com/ryt-io/ryt-tooling-sdk-go/wallet/local"
 )
 
 //go:embed erc20.bin

@@ -23,7 +23,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/network"
+	"github.com/ryt-io/ryt-tooling-sdk-go/network"
 	"github.com/ava-labs/avalanchego/utils/constants"
 	"github.com/ava-labs/avalanchego/utils/logging"
 	"github.com/your-repo-name/publicarchive"

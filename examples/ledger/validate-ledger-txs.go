@@ -51,7 +51,7 @@ import (
 	"github.com/ava-labs/avalanchego/wallet/subnet/primary/common"
 	"github.com/ava-labs/coreth/plugin/evm/atomic"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/keychain/ledger"
+	"github.com/ryt-io/ryt-tooling-sdk-go/keychain/ledger"
 
 	avmtxs "github.com/ava-labs/avalanchego/vms/avm/txs"
 	ethcommon "github.com/ava-labs/libevm/common"

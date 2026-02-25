@@ -22,7 +22,7 @@ import (
 	"github.com/cubist-labs/cubesigner-go-sdk/client"
 	"github.com/cubist-labs/cubesigner-go-sdk/session"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/keychain/cubesigner"
+	"github.com/ryt-io/ryt-tooling-sdk-go/keychain/cubesigner"
 )
 
 func main() {

@@ -24,7 +24,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/interchain/icm"
+	"github.com/ryt-io/ryt-tooling-sdk-go/interchain/icm"
 )
 
 func main() {
@@ -80,7 +80,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/interchain/icm"
+	"github.com/ryt-io/ryt-tooling-sdk-go/interchain/icm"
 	"github.com/ava-labs/subnet-evm/core"
 )
 

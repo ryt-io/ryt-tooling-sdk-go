@@ -11,9 +11,9 @@ import (
 	"github.com/ava-labs/avalanchego/wallet/subnet/primary"
 	"github.com/ava-labs/avalanchego/wallet/subnet/primary/common"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/multisig"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/utils"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/wallet/types"
+	"github.com/ryt-io/ryt-tooling-sdk-go/multisig"
+	"github.com/ryt-io/ryt-tooling-sdk-go/utils"
+	"github.com/ryt-io/ryt-tooling-sdk-go/wallet/types"
 )
 
 // sendWithRetry submits a transaction to the network with retry logic

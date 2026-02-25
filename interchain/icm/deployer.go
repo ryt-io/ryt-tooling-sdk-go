@@ -19,9 +19,9 @@ import (
 
 	_ "embed"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/evm"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/evm/contract"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/utils"
+	"github.com/ryt-io/ryt-tooling-sdk-go/evm"
+	"github.com/ryt-io/ryt-tooling-sdk-go/evm/contract"
+	"github.com/ryt-io/ryt-tooling-sdk-go/utils"
 )
 
 //go:embed smart_contracts/messenger_deployment_transaction_v1.0.0.txt

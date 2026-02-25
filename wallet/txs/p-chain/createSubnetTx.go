@@ -5,7 +5,7 @@ package txs
 import (
 	"fmt"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/constants"
+	"github.com/ryt-io/ryt-tooling-sdk-go/constants"
 )
 
 // CreateSubnetTxParams contains all parameters needed to create a ConvertSubnetToL1Tx

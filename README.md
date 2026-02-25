@@ -14,11 +14,11 @@
 ### Installing
 Use `go get` to retrieve the SDK to add it to your project's Go module dependencies.
 
-	go get github.com/ava-labs/avalanche-tooling-sdk-go
+	go get github.com/ryt-io/ryt-tooling-sdk-go
 
 To update the SDK use `go get -u` to retrieve the latest version of the SDK.
 
-	go get -u github.com/ava-labs/avalanche-tooling-sdk-go
+	go get -u github.com/ryt-io/ryt-tooling-sdk-go
 
 ## Wallet Interface
 

@@ -14,9 +14,9 @@ import (
 	"github.com/ava-labs/avalanchego/utils/logging"
 	"github.com/ava-labs/libevm/common"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/network"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/wallet"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/wallet/local"
+	"github.com/ryt-io/ryt-tooling-sdk-go/network"
+	"github.com/ryt-io/ryt-tooling-sdk-go/wallet"
+	"github.com/ryt-io/ryt-tooling-sdk-go/wallet/local"
 )
 
 const warpPrecompileAddress = "0x0200000000000000000000000000000000000005"

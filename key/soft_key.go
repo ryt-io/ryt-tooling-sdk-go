@@ -21,10 +21,10 @@ import (
 	"github.com/ava-labs/avalanchego/vms/secp256k1fx"
 	"github.com/ava-labs/libevm/crypto"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/network"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/utils"
+	"github.com/ryt-io/ryt-tooling-sdk-go/network"
+	"github.com/ryt-io/ryt-tooling-sdk-go/utils"
 
-	sdkConstants "github.com/ava-labs/avalanche-tooling-sdk-go/constants"
+	sdkConstants "github.com/ryt-io/ryt-tooling-sdk-go/constants"
 )
 
 var (

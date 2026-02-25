@@ -14,10 +14,10 @@ import (
 	"github.com/ava-labs/avalanchego/ids"
 	"github.com/ava-labs/avalanchego/utils/logging"
 
-	"github.com/ava-labs/avalanche-tooling-sdk-go/network"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/validatormanager"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/wallet"
-	"github.com/ava-labs/avalanche-tooling-sdk-go/wallet/local"
+	"github.com/ryt-io/ryt-tooling-sdk-go/network"
+	"github.com/ryt-io/ryt-tooling-sdk-go/validatormanager"
+	"github.com/ryt-io/ryt-tooling-sdk-go/wallet"
+	"github.com/ryt-io/ryt-tooling-sdk-go/wallet/local"
 )
 
 const dexalotTestnetRPC = "https://subnets.avax.network/dexalot/testnet/rpc"
