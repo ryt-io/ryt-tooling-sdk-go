@@ -116,10 +116,10 @@ func (mr *LedgerMockRecorder) SignHash(hash, addressIndices any) *gomock.Call {
 }
 
 // Version mocks base method.
-func (m *Ledger) Version() (*version.Semantic, error) {
+func (m *Ledger) Version() (*version.Application, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Version")
-	ret0, _ := ret[0].(*version.Semantic)
+	ret0, _ := ret[0].(*version.Application)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

@@ -10,7 +10,7 @@ import (
 
 // Ledger interface for the ledger wrapper
 type Ledger interface {
-	Version() (v *version.Semantic, err error)
+	Version() (v *version.Application, err error)
 	PubKey(addressIndex uint32) (*secp256k1.PublicKey, error)
 	PubKeys(addressIndices []uint32) ([]*secp256k1.PublicKey, error)
 	SignHash(hash []byte, addressIndices []uint32) ([][]byte, error)

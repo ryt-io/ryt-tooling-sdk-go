@@ -206,7 +206,7 @@ func (l *Device) Sign(txBytes []byte, addressIndices []uint32) ([][]byte, error)
 	return responses, nil
 }
 
-func (l *Device) Version() (*version.Semantic, error) {
+func (l *Device) Version() (*version.Application, error) {
 	var resp *ledger.VersionInfo
 	err := retryOnHIDAPIError(func() error {
 		var err error
@@ -216,7 +216,7 @@ func (l *Device) Version() (*version.Semantic, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &version.Semantic{
+	return &version.Application{
 		Major: int(resp.Major),
 		Minor: int(resp.Minor),
 		Patch: int(resp.Patch),
