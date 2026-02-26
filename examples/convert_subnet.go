@@ -11,7 +11,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/ava-labs/avalanchego/utils/logging"
+	"github.com/ryt-io/ryt-v2/utils/logging"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/account"
 	"github.com/ryt-io/ryt-tooling-sdk-go/network"
@@ -20,7 +20,7 @@ import (
 	"github.com/ryt-io/ryt-tooling-sdk-go/wallet/types"
 
 	pchainTxs "github.com/ryt-io/ryt-tooling-sdk-go/wallet/txs/p-chain"
-	avagoTxs "github.com/ava-labs/avalanchego/vms/platformvm/txs"
+	avagoTxs "github.com/ryt-io/ryt-v2/vms/platformvm/txs"
 )
 
 // ConvertSubnet demonstrates converting a subnet to L1 using the wallet

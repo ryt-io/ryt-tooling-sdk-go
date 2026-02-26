@@ -8,9 +8,9 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/ava-labs/libevm/common"
-	"github.com/ava-labs/libevm/crypto"
-	"github.com/ava-labs/subnet-evm/core"
+	"github.com/ryt-io/libevm/common"
+	"github.com/ryt-io/libevm/crypto"
+	"github.com/ryt-io/subnet-evm/core"
 
 	_ "embed"
 

@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ava-labs/subnet-evm/ethclient"
-	"github.com/ava-labs/subnet-evm/rpc"
+	"github.com/ryt-io/subnet-evm/ethclient"
+	"github.com/ryt-io/subnet-evm/rpc"
 	"github.com/stretchr/testify/require"
 )
 

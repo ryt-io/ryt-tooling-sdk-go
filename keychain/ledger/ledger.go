@@ -4,8 +4,8 @@
 package ledger
 
 import (
-	"github.com/ava-labs/avalanchego/utils/crypto/secp256k1"
-	"github.com/ava-labs/avalanchego/version"
+	"github.com/ryt-io/ryt-v2/utils/crypto/secp256k1"
+	"github.com/ryt-io/ryt-v2/version"
 )
 
 // Ledger interface for the ledger wrapper

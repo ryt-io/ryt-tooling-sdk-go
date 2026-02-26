@@ -7,14 +7,14 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ava-labs/avalanchego/api/info"
-	"github.com/ava-labs/avalanchego/ids"
-	"github.com/ava-labs/avalanchego/utils/logging"
-	"github.com/ava-labs/avalanchego/vms/platformvm"
-	"github.com/ava-labs/avalanchego/vms/platformvm/txs"
-	"github.com/ava-labs/avalanchego/vms/platformvm/warp"
-	"github.com/ava-labs/libevm/common"
-	"github.com/ava-labs/libevm/core/types"
+	"github.com/ryt-io/ryt-v2/api/info"
+	"github.com/ryt-io/ryt-v2/ids"
+	"github.com/ryt-io/ryt-v2/utils/logging"
+	"github.com/ryt-io/ryt-v2/vms/platformvm"
+	"github.com/ryt-io/ryt-v2/vms/platformvm/txs"
+	"github.com/ryt-io/ryt-v2/vms/platformvm/warp"
+	"github.com/ryt-io/libevm/common"
+	"github.com/ryt-io/libevm/core/types"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/evm"
 	"github.com/ryt-io/ryt-tooling-sdk-go/evm/contract"
@@ -23,9 +23,9 @@ import (
 	"github.com/ryt-io/ryt-tooling-sdk-go/utils"
 	"github.com/ryt-io/ryt-tooling-sdk-go/validatormanager/validatormanagertypes"
 
-	avagoconstants "github.com/ava-labs/avalanchego/utils/constants"
-	warpMessage "github.com/ava-labs/avalanchego/vms/platformvm/warp/message"
-	warpPayload "github.com/ava-labs/avalanchego/vms/platformvm/warp/payload"
+	avagoconstants "github.com/ryt-io/ryt-v2/utils/constants"
+	warpMessage "github.com/ryt-io/ryt-v2/vms/platformvm/warp/message"
+	warpPayload "github.com/ryt-io/ryt-v2/vms/platformvm/warp/payload"
 )
 
 type ACP99ValidatorManagerSettings struct {

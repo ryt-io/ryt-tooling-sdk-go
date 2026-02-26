@@ -11,21 +11,21 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ava-labs/avalanchego/vms/evm/predicate"
-	"github.com/ava-labs/libevm/common"
-	"github.com/ava-labs/libevm/core/types"
-	"github.com/ava-labs/subnet-evm/accounts/abi/bind"
-	"github.com/ava-labs/subnet-evm/ethclient"
-	"github.com/ava-labs/subnet-evm/params"
-	"github.com/ava-labs/subnet-evm/plugin/evm/upgrade/legacy"
-	"github.com/ava-labs/subnet-evm/precompile/contracts/warp"
+	"github.com/ryt-io/libevm/common"
+	"github.com/ryt-io/libevm/core/types"
+	"github.com/ryt-io/ryt-v2/vms/evm/predicate"
+	"github.com/ryt-io/subnet-evm/accounts/abi/bind"
+	"github.com/ryt-io/subnet-evm/ethclient"
+	"github.com/ryt-io/subnet-evm/params"
+	"github.com/ryt-io/subnet-evm/plugin/evm/upgrade/legacy"
+	"github.com/ryt-io/subnet-evm/precompile/contracts/warp"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/constants"
 	"github.com/ryt-io/ryt-tooling-sdk-go/utils"
 
-	avalancheWarp "github.com/ava-labs/avalanchego/vms/platformvm/warp"
-	ethereum "github.com/ava-labs/libevm"
-	ethparams "github.com/ava-labs/libevm/params"
+	ethereum "github.com/ryt-io/libevm"
+	ethparams "github.com/ryt-io/libevm/params"
+	avalancheWarp "github.com/ryt-io/ryt-v2/vms/platformvm/warp"
 )
 
 const (

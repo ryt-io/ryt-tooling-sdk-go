@@ -8,16 +8,16 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/ava-labs/avalanchego/vms/platformvm/warp"
+	"github.com/ryt-io/ryt-v2/vms/platformvm/warp"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/account"
 	"github.com/ryt-io/ryt-tooling-sdk-go/evm"
 	"github.com/ryt-io/ryt-tooling-sdk-go/evm/contract"
 	"github.com/ryt-io/ryt-tooling-sdk-go/wallet"
 
-	ethereum "github.com/ava-labs/libevm"
-	ethCommon "github.com/ava-labs/libevm/common"
-	ethTypes "github.com/ava-labs/libevm/core/types"
+	ethereum "github.com/ryt-io/libevm"
+	ethCommon "github.com/ryt-io/libevm/common"
+	ethTypes "github.com/ryt-io/libevm/core/types"
 )
 
 // SetChain sets the current EVM chain by RPC URL

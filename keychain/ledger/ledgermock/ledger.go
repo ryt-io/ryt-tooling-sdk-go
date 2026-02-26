@@ -12,8 +12,8 @@ package ledgermock
 import (
 	reflect "reflect"
 
-	secp256k1 "github.com/ava-labs/avalanchego/utils/crypto/secp256k1"
-	version "github.com/ava-labs/avalanchego/version"
+	secp256k1 "github.com/ryt-io/ryt-v2/utils/crypto/secp256k1"
+	version "github.com/ryt-io/ryt-v2/version"
 	gomock "go.uber.org/mock/gomock"
 )
 

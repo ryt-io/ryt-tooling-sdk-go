@@ -12,9 +12,9 @@ package mocks
 import (
 	reflect "reflect"
 
-	keychain "github.com/ava-labs/avalanchego/utils/crypto/keychain"
-	set "github.com/ava-labs/avalanchego/utils/set"
-	common "github.com/ava-labs/libevm/common"
+	keychain "github.com/ryt-io/ryt-v2/utils/crypto/keychain"
+	set "github.com/ryt-io/ryt-v2/utils/set"
+	common "github.com/ryt-io/libevm/common"
 	gomock "go.uber.org/mock/gomock"
 )
 

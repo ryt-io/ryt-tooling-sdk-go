@@ -5,14 +5,14 @@ package validator
 import (
 	"encoding/json"
 
-	"github.com/ava-labs/avalanchego/ids"
-	"github.com/ava-labs/avalanchego/utils/rpc"
-	"github.com/ava-labs/avalanchego/vms/platformvm"
+	"github.com/ryt-io/ryt-v2/ids"
+	"github.com/ryt-io/ryt-v2/utils/rpc"
+	"github.com/ryt-io/ryt-v2/vms/platformvm"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/network"
 	"github.com/ryt-io/ryt-tooling-sdk-go/utils"
 
-	avalanchegojson "github.com/ava-labs/avalanchego/utils/json"
+	avalanchegojson "github.com/ryt-io/ryt-v2/utils/json"
 )
 
 type ValidatorKind int64

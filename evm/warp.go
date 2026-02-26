@@ -5,10 +5,10 @@ package evm
 import (
 	"fmt"
 
-	"github.com/ava-labs/avalanchego/vms/platformvm/warp"
-	"github.com/ava-labs/libevm/core/types"
+	"github.com/ryt-io/ryt-v2/vms/platformvm/warp"
+	"github.com/ryt-io/libevm/core/types"
 
-	subnetEvmWarp "github.com/ava-labs/subnet-evm/precompile/contracts/warp"
+	subnetEvmWarp "github.com/ryt-io/subnet-evm/precompile/contracts/warp"
 )
 
 // get all unsigned warp messages contained in [logs]

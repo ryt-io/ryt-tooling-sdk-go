@@ -6,11 +6,11 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/ava-labs/avalanchego/wallet/subnet/primary"
+	"github.com/ryt-io/ryt-v2/wallet/subnet/primary"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/wallet/types"
 
-	avagoTxs "github.com/ava-labs/avalanchego/vms/platformvm/txs"
+	avagoTxs "github.com/ryt-io/ryt-v2/vms/platformvm/txs"
 )
 
 // SignTx signs P-Chain transactions

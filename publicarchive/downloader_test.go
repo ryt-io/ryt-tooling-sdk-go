@@ -14,8 +14,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/ava-labs/avalanchego/utils/constants"
-	"github.com/ava-labs/avalanchego/utils/logging"
+	"github.com/ryt-io/ryt-v2/utils/constants"
+	"github.com/ryt-io/ryt-v2/utils/logging"
 	"github.com/cavaliergopher/grab/v3"
 	"github.com/stretchr/testify/require"
 

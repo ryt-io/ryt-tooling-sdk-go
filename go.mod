@@ -4,12 +4,12 @@ go 1.24.9
 
 require (
 	connectrpc.com/connect v1.19.1
-	github.com/ava-labs/avalanchego v1.14.0-fuji-rc.1
-	github.com/ava-labs/coreth v0.15.4-rc.4
-	github.com/ava-labs/icm-services v1.4.1-0.20251021221544-ae1d7d5a81f3
+	github.com/ryt-io/ryt-v2 v0.1.0
+	github.com/ryt-io/coreth v0.1.0
+	github.com/ryt-io/icm-services v0.1.0
 	github.com/ava-labs/ledger-avalanche-go v1.1.0
-	github.com/ava-labs/libevm v1.13.15-0.20251003195629-910e897c54c3
-	github.com/ava-labs/subnet-evm v0.8.0-fuji
+	github.com/ryt-io/libevm v0.1.0
+	github.com/ryt-io/subnet-evm v0.1.0
 	github.com/cavaliergopher/grab/v3 v3.0.1
 	github.com/cubist-labs/cubesigner-go-sdk v0.0.16
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.0

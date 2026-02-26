@@ -7,12 +7,12 @@ import (
 	"net/url"
 
 	"connectrpc.com/connect"
-	"github.com/ava-labs/avalanchego/api/connectclient"
-	"github.com/ava-labs/avalanchego/connectproto/pb/proposervm/proposervmconnect"
-	"github.com/ava-labs/avalanchego/vms/proposervm"
-	"github.com/ava-labs/avalanchego/vms/proposervm/block"
+	"github.com/ryt-io/ryt-v2/api/connectclient"
+	"github.com/ryt-io/ryt-v2/connectproto/pb/proposervm/proposervmconnect"
+	"github.com/ryt-io/ryt-v2/vms/proposervm"
+	"github.com/ryt-io/ryt-v2/vms/proposervm/block"
 
-	pbproposervm "github.com/ava-labs/avalanchego/connectproto/pb/proposervm"
+	pbproposervm "github.com/ryt-io/ryt-v2/connectproto/pb/proposervm"
 )
 
 // GetCurrentEpoch returns the current epoch for a chain using JSON-RPC.

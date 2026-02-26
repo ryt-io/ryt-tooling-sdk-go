@@ -6,12 +6,12 @@ import (
 	"fmt"
 	"math"
 
-	"github.com/ava-labs/avalanchego/ids"
-	"github.com/ava-labs/avalanchego/utils/crypto/secp256k1"
-	"github.com/ava-labs/avalanchego/vms/components/verify"
-	"github.com/ava-labs/avalanchego/vms/platformvm"
-	"github.com/ava-labs/avalanchego/vms/platformvm/txs"
-	"github.com/ava-labs/avalanchego/vms/secp256k1fx"
+	"github.com/ryt-io/ryt-v2/ids"
+	"github.com/ryt-io/ryt-v2/utils/crypto/secp256k1"
+	"github.com/ryt-io/ryt-v2/vms/components/verify"
+	"github.com/ryt-io/ryt-v2/vms/platformvm"
+	"github.com/ryt-io/ryt-v2/vms/platformvm/txs"
+	"github.com/ryt-io/ryt-v2/vms/secp256k1fx"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/network"
 	"github.com/ryt-io/ryt-tooling-sdk-go/utils"

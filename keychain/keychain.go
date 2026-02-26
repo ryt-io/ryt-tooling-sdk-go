@@ -5,7 +5,7 @@ package keychain
 import (
 	"fmt"
 
-	"github.com/ava-labs/avalanchego/utils/crypto/keychain"
+	"github.com/ryt-io/ryt-v2/utils/crypto/keychain"
 	"golang.org/x/exp/maps"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/key"

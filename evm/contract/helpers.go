@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ava-labs/libevm/crypto"
-	"github.com/ava-labs/libevm/rpc"
+	"github.com/ryt-io/libevm/crypto"
+	"github.com/ryt-io/libevm/rpc"
 )
 
 // GetSelector returns evm selector code for the given signature.

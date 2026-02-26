@@ -13,12 +13,12 @@ import (
 	"os"
 	"time"
 
-	"github.com/ava-labs/avalanchego/utils/constants"
-	"github.com/ava-labs/avalanchego/utils/units"
-	"github.com/ava-labs/avalanchego/vms/components/avax"
-	"github.com/ava-labs/avalanchego/vms/secp256k1fx"
-	"github.com/ava-labs/avalanchego/wallet/subnet/primary"
-	"github.com/ava-labs/avalanchego/wallet/subnet/primary/common"
+	"github.com/ryt-io/ryt-v2/utils/constants"
+	"github.com/ryt-io/ryt-v2/utils/units"
+	"github.com/ryt-io/ryt-v2/vms/components/avax"
+	"github.com/ryt-io/ryt-v2/vms/secp256k1fx"
+	"github.com/ryt-io/ryt-v2/wallet/subnet/primary"
+	"github.com/ryt-io/ryt-v2/wallet/subnet/primary/common"
 	"github.com/cubist-labs/cubesigner-go-sdk/client"
 	"github.com/cubist-labs/cubesigner-go-sdk/session"
 

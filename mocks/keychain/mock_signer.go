@@ -12,7 +12,7 @@ package mocks
 import (
 	reflect "reflect"
 
-	ids "github.com/ava-labs/avalanchego/ids"
+	ids "github.com/ryt-io/ryt-v2/ids"
 	gomock "go.uber.org/mock/gomock"
 )
 

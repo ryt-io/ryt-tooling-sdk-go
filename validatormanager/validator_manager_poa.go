@@ -4,10 +4,10 @@
 package validatormanager
 
 import (
-	"github.com/ava-labs/avalanchego/ids"
-	"github.com/ava-labs/avalanchego/utils/logging"
-	"github.com/ava-labs/libevm/common"
-	"github.com/ava-labs/libevm/core/types"
+	"github.com/ryt-io/ryt-v2/ids"
+	"github.com/ryt-io/ryt-v2/utils/logging"
+	"github.com/ryt-io/libevm/common"
+	"github.com/ryt-io/libevm/core/types"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/evm"
 	"github.com/ryt-io/ryt-tooling-sdk-go/evm/contract"

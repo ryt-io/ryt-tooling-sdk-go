@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ava-labs/avalanchego/vms/platformvm/txs"
-	"github.com/ava-labs/avalanchego/wallet/subnet/primary"
-	"github.com/ava-labs/avalanchego/wallet/subnet/primary/common"
+	"github.com/ryt-io/ryt-v2/vms/platformvm/txs"
+	"github.com/ryt-io/ryt-v2/wallet/subnet/primary"
+	"github.com/ryt-io/ryt-v2/wallet/subnet/primary/common"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/multisig"
 	"github.com/ryt-io/ryt-tooling-sdk-go/utils"

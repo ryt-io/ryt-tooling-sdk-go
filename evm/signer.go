@@ -7,11 +7,11 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ava-labs/avalanchego/utils/crypto/keychain"
-	"github.com/ava-labs/avalanchego/wallet/chain/c"
-	"github.com/ava-labs/libevm/common"
-	"github.com/ava-labs/libevm/core/types"
-	"github.com/ava-labs/subnet-evm/accounts/abi/bind"
+	"github.com/ryt-io/ryt-v2/utils/crypto/keychain"
+	"github.com/ryt-io/ryt-v2/wallet/chain/c"
+	"github.com/ryt-io/libevm/common"
+	"github.com/ryt-io/libevm/core/types"
+	"github.com/ryt-io/subnet-evm/accounts/abi/bind"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/key"
 )

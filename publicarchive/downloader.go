@@ -14,14 +14,14 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ava-labs/avalanchego/utils/logging"
+	"github.com/ryt-io/ryt-v2/utils/logging"
 	"github.com/cavaliergopher/grab/v3"
 	"go.uber.org/zap"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/constants"
 	"github.com/ryt-io/ryt-tooling-sdk-go/network"
 
-	avagoConstants "github.com/ava-labs/avalanchego/utils/constants"
+	avagoConstants "github.com/ryt-io/ryt-v2/utils/constants"
 )
 
 const (

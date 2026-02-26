@@ -4,13 +4,13 @@
 package utils
 
 import (
-	"github.com/ava-labs/avalanchego/wallet/chain/x/builder"
-	"github.com/ava-labs/coreth/plugin/evm/atomic"
+	"github.com/ryt-io/ryt-v2/wallet/chain/x/builder"
+	"github.com/ryt-io/coreth/plugin/evm/atomic"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/constants"
 
-	avmtxs "github.com/ava-labs/avalanchego/vms/avm/txs"
-	platformvmtxs "github.com/ava-labs/avalanchego/vms/platformvm/txs"
+	avmtxs "github.com/ryt-io/ryt-v2/vms/avm/txs"
+	platformvmtxs "github.com/ryt-io/ryt-v2/vms/platformvm/txs"
 )
 
 // AutoDetectChain attempts to determine which chain a transaction belongs to by analyzing its bytes.

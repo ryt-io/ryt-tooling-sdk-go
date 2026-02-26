@@ -11,8 +11,8 @@ import (
 	"math/big"
 	"os"
 
-	"github.com/ava-labs/avalanchego/ids"
-	"github.com/ava-labs/avalanchego/utils/logging"
+	"github.com/ryt-io/ryt-v2/ids"
+	"github.com/ryt-io/ryt-v2/utils/logging"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/network"
 	"github.com/ryt-io/ryt-tooling-sdk-go/validatormanager"

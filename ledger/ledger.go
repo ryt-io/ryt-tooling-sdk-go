@@ -5,9 +5,9 @@ package ledger
 import (
 	"fmt"
 
-	"github.com/ava-labs/avalanchego/ids"
-	"github.com/ava-labs/avalanchego/utils/formatting/address"
-	"github.com/ava-labs/avalanchego/vms/platformvm"
+	"github.com/ryt-io/ryt-v2/ids"
+	"github.com/ryt-io/ryt-v2/utils/formatting/address"
+	"github.com/ryt-io/ryt-v2/vms/platformvm"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/keychain/ledger"
 	"github.com/ryt-io/ryt-tooling-sdk-go/network"

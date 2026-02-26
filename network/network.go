@@ -4,7 +4,7 @@
 package network
 
 import (
-	"github.com/ava-labs/avalanchego/utils/constants"
+	"github.com/ryt-io/ryt-v2/utils/constants"
 )
 
 type NetworkKind int64

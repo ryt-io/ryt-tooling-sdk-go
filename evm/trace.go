@@ -6,7 +6,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/ava-labs/subnet-evm/rpc"
+	"github.com/ryt-io/subnet-evm/rpc"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/utils"
 )

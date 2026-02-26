@@ -7,11 +7,11 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/ava-labs/avalanchego/ids"
-	"github.com/ava-labs/avalanchego/vms/components/avax"
-	"github.com/ava-labs/avalanchego/wallet/chain/x/builder"
-	"github.com/ava-labs/coreth/plugin/evm/atomic"
-	"github.com/ava-labs/libevm/common"
+	"github.com/ryt-io/ryt-v2/ids"
+	"github.com/ryt-io/ryt-v2/vms/components/avax"
+	"github.com/ryt-io/ryt-v2/wallet/chain/x/builder"
+	"github.com/ryt-io/coreth/plugin/evm/atomic"
+	"github.com/ryt-io/libevm/common"
 	"github.com/cubist-labs/cubesigner-go-sdk/client"
 	"github.com/cubist-labs/cubesigner-go-sdk/models"
 	"github.com/stretchr/testify/require"
@@ -19,8 +19,8 @@ import (
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/keychain/cubesigner/cubesignermock"
 
-	avmtxs "github.com/ava-labs/avalanchego/vms/avm/txs"
-	platformvmtxs "github.com/ava-labs/avalanchego/vms/platformvm/txs"
+	avmtxs "github.com/ryt-io/ryt-v2/vms/avm/txs"
+	platformvmtxs "github.com/ryt-io/ryt-v2/vms/platformvm/txs"
 )
 
 var errTest = errors.New("test")

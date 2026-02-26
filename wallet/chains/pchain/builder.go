@@ -6,20 +6,20 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/ava-labs/avalanchego/ids"
-	"github.com/ava-labs/avalanchego/utils/formatting/address"
-	"github.com/ava-labs/avalanchego/utils/set"
-	"github.com/ava-labs/avalanchego/vms/platformvm/signer"
-	"github.com/ava-labs/avalanchego/vms/platformvm/warp/message"
-	"github.com/ava-labs/avalanchego/vms/secp256k1fx"
-	"github.com/ava-labs/avalanchego/wallet/subnet/primary"
-	"github.com/ava-labs/avalanchego/wallet/subnet/primary/common"
+	"github.com/ryt-io/ryt-v2/ids"
+	"github.com/ryt-io/ryt-v2/utils/formatting/address"
+	"github.com/ryt-io/ryt-v2/utils/set"
+	"github.com/ryt-io/ryt-v2/vms/platformvm/signer"
+	"github.com/ryt-io/ryt-v2/vms/platformvm/warp/message"
+	"github.com/ryt-io/ryt-v2/vms/secp256k1fx"
+	"github.com/ryt-io/ryt-v2/wallet/subnet/primary"
+	"github.com/ryt-io/ryt-v2/wallet/subnet/primary/common"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/account"
 	"github.com/ryt-io/ryt-tooling-sdk-go/wallet/types"
 
 	pchainTxs "github.com/ryt-io/ryt-tooling-sdk-go/wallet/txs/p-chain"
-	avagoTxs "github.com/ava-labs/avalanchego/vms/platformvm/txs"
+	avagoTxs "github.com/ryt-io/ryt-v2/vms/platformvm/txs"
 )
 
 // BuildTx builds P-Chain transactions

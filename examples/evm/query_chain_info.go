@@ -11,7 +11,7 @@ import (
 	"math/big"
 	"os"
 
-	"github.com/ava-labs/avalanchego/utils/logging"
+	"github.com/ryt-io/ryt-v2/utils/logging"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/account"
 	"github.com/ryt-io/ryt-tooling-sdk-go/network"

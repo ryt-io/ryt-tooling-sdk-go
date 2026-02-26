@@ -3,9 +3,9 @@
 package local
 
 import (
-	"github.com/ava-labs/avalanchego/ids"
-	"github.com/ava-labs/avalanchego/utils/logging"
-	"github.com/ava-labs/avalanchego/wallet/subnet/primary"
+	"github.com/ryt-io/ryt-v2/ids"
+	"github.com/ryt-io/ryt-v2/utils/logging"
+	"github.com/ryt-io/ryt-v2/wallet/subnet/primary"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/account"
 	"github.com/ryt-io/ryt-tooling-sdk-go/evm"

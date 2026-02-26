@@ -11,17 +11,17 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ava-labs/avalanchego/vms/platformvm/warp"
-	"github.com/ava-labs/libevm/common"
-	"github.com/ava-labs/libevm/core/types"
-	"github.com/ava-labs/subnet-evm/ethclient"
+	"github.com/ryt-io/libevm/common"
+	"github.com/ryt-io/libevm/core/types"
+	"github.com/ryt-io/ryt-v2/vms/platformvm/warp"
+	"github.com/ryt-io/subnet-evm/ethclient"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/mock/gomock"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/constants"
 
+	ethereum "github.com/ryt-io/libevm"
 	mockethclient "github.com/ryt-io/ryt-tooling-sdk-go/mocks/ethclient"
-	ethereum "github.com/ava-labs/libevm"
 )
 
 func TestHasScheme(t *testing.T) {

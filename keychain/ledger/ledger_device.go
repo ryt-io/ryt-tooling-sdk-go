@@ -7,9 +7,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ava-labs/avalanchego/utils/crypto/secp256k1"
-	"github.com/ava-labs/avalanchego/utils/hashing"
-	"github.com/ava-labs/avalanchego/version"
+	"github.com/ryt-io/ryt-v2/utils/crypto/secp256k1"
+	"github.com/ryt-io/ryt-v2/utils/hashing"
+	"github.com/ryt-io/ryt-v2/version"
 
 	ledger "github.com/ava-labs/ledger-avalanche-go"
 	bip32 "github.com/tyler-smith/go-bip32"

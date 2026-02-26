@@ -24,9 +24,9 @@ import (
 	"log"
 	"time"
 
-	"github.com/ava-labs/avalanchego/vms/secp256k1fx"
-	"github.com/ava-labs/avalanchego/wallet/subnet/primary"
-	"github.com/ava-labs/avalanchego/wallet/subnet/primary/common"
+	"github.com/ryt-io/ryt-v2/vms/secp256k1fx"
+	"github.com/ryt-io/ryt-v2/wallet/subnet/primary"
+	"github.com/ryt-io/ryt-v2/wallet/subnet/primary/common"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/keychain/ledger"
 )

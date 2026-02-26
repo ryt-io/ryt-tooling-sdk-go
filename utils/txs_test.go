@@ -6,24 +6,24 @@ package utils
 import (
 	"testing"
 
-	"github.com/ava-labs/avalanchego/ids"
-	"github.com/ava-labs/avalanchego/utils/crypto/bls/signer/localsigner"
-	"github.com/ava-labs/avalanchego/vms/components/avax"
-	"github.com/ava-labs/avalanchego/vms/components/verify"
-	"github.com/ava-labs/avalanchego/vms/platformvm/signer"
-	"github.com/ava-labs/avalanchego/vms/platformvm/warp"
-	"github.com/ava-labs/avalanchego/vms/platformvm/warp/message"
-	"github.com/ava-labs/avalanchego/vms/platformvm/warp/payload"
-	"github.com/ava-labs/avalanchego/vms/secp256k1fx"
-	"github.com/ava-labs/avalanchego/wallet/chain/x/builder"
-	"github.com/ava-labs/coreth/plugin/evm/atomic"
-	"github.com/ava-labs/libevm/common"
+	"github.com/ryt-io/ryt-v2/ids"
+	"github.com/ryt-io/ryt-v2/utils/crypto/bls/signer/localsigner"
+	"github.com/ryt-io/ryt-v2/vms/components/avax"
+	"github.com/ryt-io/ryt-v2/vms/components/verify"
+	"github.com/ryt-io/ryt-v2/vms/platformvm/signer"
+	"github.com/ryt-io/ryt-v2/vms/platformvm/warp"
+	"github.com/ryt-io/ryt-v2/vms/platformvm/warp/message"
+	"github.com/ryt-io/ryt-v2/vms/platformvm/warp/payload"
+	"github.com/ryt-io/ryt-v2/vms/secp256k1fx"
+	"github.com/ryt-io/ryt-v2/wallet/chain/x/builder"
+	"github.com/ryt-io/coreth/plugin/evm/atomic"
+	"github.com/ryt-io/libevm/common"
 	"github.com/stretchr/testify/require"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/constants"
 
-	avmtxs "github.com/ava-labs/avalanchego/vms/avm/txs"
-	platformvmtxs "github.com/ava-labs/avalanchego/vms/platformvm/txs"
+	avmtxs "github.com/ryt-io/ryt-v2/vms/avm/txs"
+	platformvmtxs "github.com/ryt-io/ryt-v2/vms/platformvm/txs"
 )
 
 func TestAutoDetectChainPChainTxs(t *testing.T) {

@@ -5,13 +5,13 @@ package evm
 import (
 	"testing"
 
-	"github.com/ava-labs/avalanchego/ids"
-	"github.com/ava-labs/avalanchego/vms/platformvm/warp"
-	"github.com/ava-labs/libevm/common"
-	"github.com/ava-labs/libevm/core/types"
+	"github.com/ryt-io/ryt-v2/ids"
+	"github.com/ryt-io/ryt-v2/vms/platformvm/warp"
+	"github.com/ryt-io/libevm/common"
+	"github.com/ryt-io/libevm/core/types"
 	"github.com/stretchr/testify/require"
 
-	subnetevmwarp "github.com/ava-labs/subnet-evm/precompile/contracts/warp"
+	subnetevmwarp "github.com/ryt-io/subnet-evm/precompile/contracts/warp"
 )
 
 func TestGetWarpMessagesFromLogs(t *testing.T) {

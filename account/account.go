@@ -3,7 +3,7 @@
 package account
 
 import (
-	"github.com/ava-labs/avalanchego/vms/secp256k1fx"
+	"github.com/ryt-io/ryt-v2/vms/secp256k1fx"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/network"
 )

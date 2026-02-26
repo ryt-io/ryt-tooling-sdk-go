@@ -3,8 +3,8 @@
 package precompiles
 
 import (
-	"github.com/ava-labs/subnet-evm/precompile/contracts/nativeminter"
-	"github.com/ava-labs/subnet-evm/precompile/contracts/warp"
+	"github.com/ryt-io/subnet-evm/precompile/contracts/nativeminter"
+	"github.com/ryt-io/subnet-evm/precompile/contracts/warp"
 )
 
 var (

@@ -5,7 +5,7 @@ package wallet
 import (
 	"fmt"
 
-	"github.com/ava-labs/avalanchego/wallet/subnet/primary"
+	"github.com/ryt-io/ryt-v2/wallet/subnet/primary"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/account"
 	"github.com/ryt-io/ryt-tooling-sdk-go/wallet/chains/pchain"

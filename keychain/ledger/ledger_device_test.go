@@ -6,9 +6,9 @@ package ledger
 import (
 	"testing"
 
-	"github.com/ava-labs/avalanchego/utils/crypto/secp256k1"
-	"github.com/ava-labs/avalanchego/utils/formatting/address"
-	"github.com/ava-labs/avalanchego/utils/hashing"
+	"github.com/ryt-io/ryt-v2/utils/crypto/secp256k1"
+	"github.com/ryt-io/ryt-v2/utils/formatting/address"
+	"github.com/ryt-io/ryt-v2/utils/hashing"
 	"github.com/stretchr/testify/require"
 )
 

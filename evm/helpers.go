@@ -7,10 +7,10 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/ava-labs/avalanchego/utils/units"
-	"github.com/ava-labs/libevm/common"
-	"github.com/ava-labs/libevm/core/types"
-	"github.com/ava-labs/libevm/crypto"
+	"github.com/ryt-io/ryt-v2/utils/units"
+	"github.com/ryt-io/libevm/common"
+	"github.com/ryt-io/libevm/core/types"
+	"github.com/ryt-io/libevm/crypto"
 )
 
 // Returns the first log in 'logs' that is successfully parsed by 'parser'

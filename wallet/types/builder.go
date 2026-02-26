@@ -5,7 +5,7 @@ package types
 import (
 	"fmt"
 
-	"github.com/ava-labs/avalanchego/vms/platformvm/txs"
+	"github.com/ryt-io/ryt-v2/vms/platformvm/txs"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/constants"
 )

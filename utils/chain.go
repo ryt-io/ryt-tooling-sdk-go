@@ -3,8 +3,8 @@
 package utils
 
 import (
-	"github.com/ava-labs/avalanchego/api/info"
-	"github.com/ava-labs/avalanchego/ids"
+	"github.com/ryt-io/ryt-v2/api/info"
+	"github.com/ryt-io/ryt-v2/ids"
 )
 
 // GetChainID returns the blockchain ID for a given chain name (e.g., "C", "X", "P")

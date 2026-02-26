@@ -6,14 +6,14 @@ import (
 	"context"
 	"math/big"
 
-	"github.com/ava-labs/libevm/common"
+	"github.com/ryt-io/libevm/common"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/account"
 	"github.com/ryt-io/ryt-tooling-sdk-go/network"
 	"github.com/ryt-io/ryt-tooling-sdk-go/wallet/types"
 
-	ethereum "github.com/ava-labs/libevm"
-	ethTypes "github.com/ava-labs/libevm/core/types"
+	ethereum "github.com/ryt-io/libevm"
+	ethTypes "github.com/ryt-io/libevm/core/types"
 )
 
 // Options, Option, and With* functions are defined in options.go

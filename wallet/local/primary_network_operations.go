@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/ava-labs/avalanchego/ids"
-	"github.com/ava-labs/avalanchego/wallet/subnet/primary"
+	"github.com/ryt-io/ryt-v2/ids"
+	"github.com/ryt-io/ryt-v2/wallet/subnet/primary"
 
 	"github.com/ryt-io/ryt-tooling-sdk-go/account"
 	"github.com/ryt-io/ryt-tooling-sdk-go/wallet"
 	"github.com/ryt-io/ryt-tooling-sdk-go/wallet/types"
 
 	txs "github.com/ryt-io/ryt-tooling-sdk-go/wallet/txs/p-chain"
-	avagoTxs "github.com/ava-labs/avalanchego/vms/platformvm/txs"
+	avagoTxs "github.com/ryt-io/ryt-v2/vms/platformvm/txs"
 )
 
 // primaryNetworkOperations implements the PrimaryNetworkOperations interface for LocalWallet

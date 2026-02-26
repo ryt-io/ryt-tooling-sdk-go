@@ -10,12 +10,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ava-labs/avalanchego/ids"
-	"github.com/ava-labs/avalanchego/utils/crypto/keychain"
-	"github.com/ava-labs/avalanchego/utils/formatting/address"
-	"github.com/ava-labs/avalanchego/utils/set"
-	"github.com/ava-labs/avalanchego/wallet/chain/c"
-	"github.com/ava-labs/libevm/common"
+	"github.com/ryt-io/ryt-v2/ids"
+	"github.com/ryt-io/ryt-v2/utils/crypto/keychain"
+	"github.com/ryt-io/ryt-v2/utils/formatting/address"
+	"github.com/ryt-io/ryt-v2/utils/set"
+	"github.com/ryt-io/ryt-v2/wallet/chain/c"
+	"github.com/ryt-io/libevm/common"
 	"github.com/cubist-labs/cubesigner-go-sdk/client"
 	"github.com/cubist-labs/cubesigner-go-sdk/models"
 	"golang.org/x/exp/maps"
@@ -23,8 +23,8 @@ import (
 	"github.com/ryt-io/ryt-tooling-sdk-go/constants"
 	"github.com/ryt-io/ryt-tooling-sdk-go/utils"
 
-	avagoconstants "github.com/ava-labs/avalanchego/utils/constants"
-	avasecp256k1 "github.com/ava-labs/avalanchego/utils/crypto/secp256k1"
+	avagoconstants "github.com/ryt-io/ryt-v2/utils/constants"
+	avasecp256k1 "github.com/ryt-io/ryt-v2/utils/crypto/secp256k1"
 	secp256k1 "github.com/decred/dcrd/dcrec/secp256k1/v4"
 )
 
